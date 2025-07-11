@@ -1,7 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Sticky Header ---
+    // --- Navbar Scroll & Hamburger Menu ---
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
     const header = document.querySelector('.header');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }));
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
@@ -10,197 +23,137 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Hamburger Menu ---
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const navLinkItems = document.querySelectorAll('.nav-links a');
-
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        // Hamburger icon animation (bars to X)
-        hamburger.querySelector('i').classList.toggle('fa-bars');
-        hamburger.querySelector('i').classList.toggle('fa-times');
-    });
-
-    // Close menu when a link is clicked
-    navLinkItems.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                hamburger.querySelector('i').classList.add('fa-bars');
-                hamburger.querySelector('i').classList.remove('fa-times');
+    // --- Animate on Scroll ---
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                scrollObserver.unobserve(entry.target);
             }
         });
+    }, {
+        threshold: 0.1
     });
-    
-    // --- Portfolio Filtering ---
-    const filterBtns = document.querySelector('.portfolio-filters');
+
+    document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+        scrollObserver.observe(element);
+    });
+
+    // --- Portfolio Filter ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
 
-    filterBtns.addEventListener('click', (e) => {
-        if (e.target.tagName !== 'BUTTON') return;
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            const filter = button.dataset.filter;
 
-        // Set active button
-        const activeBtn = filterBtns.querySelector('.active');
-        activeBtn.classList.remove('active');
-        e.target.classList.add('active');
-
-        const filterValue = e.target.getAttribute('data-filter');
-
-        portfolioItems.forEach(item => {
-            const itemCategory = item.getAttribute('data-category');
-            if (filterValue === 'all' || filterValue === itemCategory) {
-                item.style.display = 'grid'; // Use grid to respect grid-auto-flow
-                setTimeout(() => item.classList.remove('hidden'), 0);
-            } else {
-                item.classList.add('hidden');
-                // Hide completely after transition
-                setTimeout(() => item.style.display = 'none', 300); 
-            }
+            portfolioItems.forEach(item => {
+                const itemCategory = item.dataset.category;
+                const shouldShow = filter === 'all' || filter === itemCategory;
+                
+                item.style.transform = 'scale(0.9)';
+                item.style.opacity = '0';
+                
+                setTimeout(() => {
+                    if (shouldShow) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.transform = 'scale(1)';
+                            item.style.opacity = '1';
+                        }, 50);
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }, 300);
+            });
         });
     });
     
-    // --- Portfolio Lightbox ---
-    const lightbox = document.getElementById('lightbox');
-    const lightboxContent = document.querySelector('.lightbox-content');
-    const lightboxClose = document.querySelector('.lightbox-close');
-    const portfolioGrid = document.querySelector('.portfolio-grid');
+    // --- Portfolio Modal (Lightbox) ---
+    const modal = document.querySelector('.portfolio-modal');
+    const modalImg = document.getElementById('modal-img');
+    const closeModal = document.querySelector('.close-modal');
 
-    portfolioGrid.addEventListener('click', (e) => {
-        const item = e.target.closest('.portfolio-item');
-        if (!item) return;
-
-        const content = item.querySelector('img, video');
-        if (!content) return;
-        
-        // Clone the element to not affect the grid
-        const clonedContent = content.cloneNode(true);
-        
-        // Clear previous content
-        lightboxContent.innerHTML = '';
-        
-        // If it's a video, add controls and enable autoplay
-        if (clonedContent.tagName === 'VIDEO') {
-            clonedContent.muted = false; // Unmute for fullscreen view
-            clonedContent.controls = true;
-            clonedContent.autoplay = true;
-        }
-
-        lightboxContent.appendChild(clonedContent);
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent background scroll
+    portfolioItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const imgSrc = item.querySelector('img').src;
+            modalImg.src = imgSrc;
+            modal.classList.add('active');
+        });
     });
 
-    const closeLightbox = () => {
-        const video = lightboxContent.querySelector('video');
-        if (video) {
-            video.pause(); // Stop video when closing
-        }
-        lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto';
+    const closeTheModal = () => {
+        modal.classList.remove('active');
     };
 
-    lightboxClose.addEventListener('click', closeLightbox);
+    closeModal.addEventListener('click', closeTheModal);
     
-    // Close lightbox on clicking the background overlay
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            closeLightbox();
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeTheModal();
         }
     });
 
-    // --- Scroll Animations ---
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Animate only once
+    // --- Functional Contact Form using Web3Forms ---
+    const form = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // --- IMPORTANT: REPLACE WITH YOUR WEB3FORMS ACCESS KEY ---
+            const accessKey = 'f04efbf8-e6a1-4784-9d88-3885f0374d82'; 
+            
+            const formData = new FormData(form);
+            formData.append("access_key", accessKey);
+            formData.append("subject", "New Contact Form Submission from ASKera Design Website");
+
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            formStatus.innerHTML = "Sending...";
+            formStatus.className = 'error'; // Neutral style while sending
+            formStatus.style.display = 'block';
+
+            try {
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: json
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    formStatus.innerHTML = "Message sent successfully!";
+                    formStatus.className = 'success';
+                    form.reset(); // Clear form fields
+                    // Reset labels to their original position
+                    form.querySelectorAll('.form-group label').forEach(label => {
+                        label.style.top = '0.8rem';
+                        label.style.fontSize = '';
+                        label.style.color = '';
+                    });
+                } else {
+                    console.error("Submission Error:", result);
+                    formStatus.innerHTML = result.message || "Oops! Something went wrong.";
+                    formStatus.className = 'error';
+                }
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                formStatus.innerHTML = "Oops! There was a problem submitting your form.";
+                formStatus.className = 'error';
             }
-        });
-    }, {
-        threshold: 0.1 // Trigger when 10% of the element is visible
-    });
-
-    animatedElements.forEach(el => {
-        observer.observe(el);
-    });
-
-});
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    // --- Control for the Video Showcase Section ---
-    const showcaseVideo = document.getElementById('promo-showcase-video');
-    const showcaseUnmuteBtn = document.getElementById('video-unmute-btn');
-
-    // Check if these elements exist on the page to avoid errors
-    if (showcaseVideo && showcaseUnmuteBtn) {
-        const icon = showcaseUnmuteBtn.querySelector('i');
-
-        showcaseUnmuteBtn.addEventListener('click', () => {
-            if (showcaseVideo.muted) {
-                // If the video is currently muted, unmute it
-                showcaseVideo.muted = false;
-                icon.classList.remove('fa-volume-mute');
-                icon.classList.add('fa-volume-high');
-            } else {
-                // If the video is currently playing sound, mute it
-                showcaseVideo.muted = true;
-                icon.classList.remove('fa-volume-high');
-                icon.classList.add('fa-volume-mute');
-            }
+            
+            setTimeout(() => {
+                formStatus.style.display = 'none';
+            }, 6000);
         });
     }
-    
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    // --- (Your other JS code is here) ---
-
-    // --- Testimonial Rating Count-Up Animation ---
-    const ratingCard = document.getElementById('overall-rating-card');
-
-    const animateCountUp = (el) => {
-        const targetValue = 4.8; // Set your target rating here
-        const duration = 2000; // Animation duration in milliseconds
-        let start = null;
-
-        const step = (timestamp) => {
-            if (!start) start = timestamp;
-            const progress = Math.min((timestamp - start) / duration, 1);
-            const currentValue = progress * targetValue;
-            el.textContent = currentValue.toFixed(1); // Update text with 1 decimal place
-
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-
-        window.requestAnimationFrame(step);
-    };
-
-    // Use Intersection Observer to trigger the animation only when visible
-    const ratingObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const ratingValueEl = document.getElementById('overall-rating-value');
-                animateCountUp(ratingValueEl);
-                // Stop observing after the animation is triggered once
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.5 // Trigger when 50% of the element is visible
-    });
-    
-    // Start observing the rating card if it exists
-    if (ratingCard) {
-        ratingObserver.observe(ratingCard);
-    }
-    
 });
