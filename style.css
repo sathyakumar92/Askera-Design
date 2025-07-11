@@ -10,6 +10,7 @@
 
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Poppins', sans-serif;
+    --font-reading: 'Lora', serif;
 
     --section-padding: 6rem 0;
 }
@@ -70,22 +71,12 @@ section {
 .section-light .section-title h2 {
     color: var(--dark-navy);
 }
-#why-choose-us .section-title, #portfolio .section-title, #reviews .section-title, #terms .section-title {
+#why-choose-us .section-title, #portfolio .section-title, #reviews .section-title, #terms .section-title, #blog .section-title {
     text-align: center;
 }
 
 /* --- Buttons --- */
-.btn {
-    display: inline-block;
-    padding: 0.8rem 2.2rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    cursor: pointer;
-}
-
+.btn { display: inline-block; padding: 0.8rem 2.2rem; border-radius: 5px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 2px solid transparent; cursor: pointer; }
 .btn-primary { background-color: var(--accent-gold); color: var(--dark-navy); border-color: var(--accent-gold); }
 .btn-primary:hover { background-color: transparent; color: var(--accent-gold); }
 .btn-secondary { background-color: transparent; border-color: var(--mid-slate); color: var(--light-text); }
@@ -101,7 +92,7 @@ section {
 .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: all 0.4s ease; padding: 1rem 0; }
 .header.scrolled { background-color: rgba(13, 27, 42, 0.85); backdrop-filter: blur(10px); padding: 0.5rem 0; box-shadow: 0 2px 15px rgba(0,0,0,0.2); }
 .navbar { display: flex; justify-content: space-between; align-items: center; }
-.nav-logo { color: #fff; text-decoration: none; font-size: 1.6rem; font-weight: 600; font-family: var(--font-body); }
+.nav-logo { color: #fff; text-decoration: none; font-size: 1.6rem; font-weight: 600; }
 .nav-menu { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
 .nav-link { color: var(--light-text); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
 .nav-link:hover { color: var(--accent-gold); }
@@ -137,15 +128,37 @@ section {
 .why-card h3 { font-family: var(--font-body); font-size: 1.4rem; margin-bottom: 1rem; }
 .why-card p { color: var(--light-gray); }
 
+/* --- Integrated Blog Section --- */
+.blog-section { background-color: var(--light-bg); }
+.blog-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; border-bottom: 1px solid #ddd; }
+.blog-tab-btn { background: none; border: none; padding: 1rem 1.5rem; font-family: var(--font-body); font-size: 1.1rem; font-weight: 600; color: var(--mid-slate); cursor: pointer; position: relative; transition: color 0.3s ease; }
+.blog-tab-btn:hover { color: var(--dark-navy); }
+.blog-tab-btn::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 3px; background-color: var(--accent-gold); transform: scaleX(0); transition: transform 0.4s ease; }
+.blog-tab-btn.active { color: var(--dark-navy); }
+.blog-tab-btn.active::after { transform: scaleX(1); }
+.blog-post-content { display: none; opacity: 0; transition: opacity 0.5s ease-in-out; background-color: #fff; border-radius: 5px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); overflow: hidden; }
+.blog-post-content.active { display: block; opacity: 1; }
+.post-featured-image { height: 350px; overflow: hidden; }
+.post-featured-image img { width: 100%; height: 100%; object-fit: cover; }
+.post-text-content { padding: 3rem; }
+.post-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; color: var(--mid-slate); margin-bottom: 1rem; font-size: 0.9rem; }
+.post-meta i { color: var(--accent-gold); margin-right: 0.5rem; }
+.post-text-content h2 { font-family: var(--font-heading); font-size: 2.5rem; color: var(--dark-navy); margin-bottom: 1rem; }
+.post-text-content p { font-family: var(--font-reading); font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 1.5rem; }
+.post-text-content .lead { font-size: 1.3rem; font-weight: 400; color: var(--dark-navy); }
+.post-text-content blockquote { border-left: 3px solid var(--accent-gold); margin: 2rem 0; padding-left: 1.5rem; font-style: italic; font-size: 1.2rem; color: #333; }
+
 /* --- Services Section --- */
+.services-section { background-color: var(--dark-navy); }
 .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-.service-card { padding: 2rem; border: 1px solid #ddd; border-radius: 5px; transition: box-shadow 0.3s ease, border-color 0.3s ease; }
-.service-card:hover { border-color: var(--accent-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.07); }
+.service-card { background: var(--dark-slate); padding: 2rem; border-radius: 5px; border-left: 3px solid var(--accent-gold); transition: background 0.3s ease; }
+.service-card:hover { background: var(--mid-slate); }
 .service-card i { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 1.5rem; }
-.service-card h3 { color: var(--dark-navy); margin-bottom: 0.5rem; }
-.service-card p { color: #555; }
+.service-card h3 { color: var(--light-text); margin-bottom: 0.5rem; }
+.service-card p { color: var(--light-gray); }
 
 /* --- Portfolio Section --- */
+.portfolio-section { background-color: var(--dark-slate); }
 .portfolio-filters { text-align: center; margin-bottom: 3rem; }
 .filter-btn { background: none; border: none; color: var(--light-gray); padding: 0.5rem 1rem; margin: 0 1rem; cursor: pointer; font-size: 1.1rem; font-weight: 500; position: relative; transition: color 0.3s ease; }
 .filter-btn::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background-color: var(--accent-gold); transition: width 0.3s ease; }
@@ -169,7 +182,6 @@ section {
 .review-card p { font-style: italic; color: #555; position: relative; z-index: 2; }
 
 /* --- Terms and Conditions Section --- */
-.terms-section { background-color: var(--light-bg); }
 .terms-container { max-width: 900px; margin: 0 auto; background-color: #fff; padding: 2rem 3rem 3rem 3rem; border-radius: 5px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); border: 1px solid #e9ecef; }
 .terms-disclaimer { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 1rem 1.5rem; margin-bottom: 2.5rem; border-radius: 5px; font-size: 0.9rem; line-height: 1.6; }
 .terms-container h3 { font-family: var(--font-body); font-size: 1.3rem; font-weight: 600; color: var(--dark-navy); margin-top: 2rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #eee; }
@@ -194,19 +206,14 @@ section {
 .form-group label { position: absolute; top: 0.8rem; left: 0; color: var(--light-gray); transition: all 0.3s ease; z-index: 1; }
 .contact-form-wrapper input:focus + label, .contact-form-wrapper input:valid + label, .contact-form-wrapper textarea:focus + label, .contact-form-wrapper textarea:valid + label { top: -1rem; font-size: 0.8rem; color: var(--accent-gold); }
 .contact-form-wrapper button { width: 100%; }
-
-/* --- Contact Form Status Message --- */
 #form-status { margin-bottom: 1rem; padding: 0.8rem; border-radius: 5px; font-weight: 500; text-align: center; display: none; }
 #form-status.success { background-color: #28a74520; color: #28a745; display: block; }
 #form-status.error { background-color: #dc354520; color: #dc3545; display: block; }
-
-/* --- Social Media Links in Contact Section --- */
 .social-links { margin-top: 2.5rem; }
 .social-links h4 { font-family: var(--font-body); font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; color: var(--light-text); }
 .social-icons { display: flex; flex-wrap: wrap; gap: 1.2rem; }
 .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; border: 2px solid var(--mid-slate); border-radius: 50%; color: var(--accent-gold); font-size: 1.2rem; text-decoration: none; transition: all 0.3s ease-in-out; }
 .social-icons a:hover { background-color: var(--accent-gold); color: var(--dark-navy); border-color: var(--accent-gold); transform: translateY(-5px); box-shadow: 0 8px 15px rgba(201, 165, 61, 0.2); }
-
 
 
 /* --- Footer --- */
@@ -226,6 +233,7 @@ section {
     .about-image-wrapper { max-width: 500px; margin: 0 auto; }
     .hero-content h1 { font-size: 3.5rem; }
     .section-title h2 { font-size: 2.5rem; }
+    .post-text-content h2 { font-size: 2rem; }
 }
 
 @media (max-width: 768px) {
@@ -239,4 +247,6 @@ section {
     .nav-menu .btn { padding: 0.8rem 2.2rem; font-size: 1.2rem; }
     .hero-content { text-align: center; max-width: 100%; }
     .hero-cta { justify-content: center; }
+    .post-featured-image { height: 250px; }
+    .post-text-content { padding: 1.5rem; }
 }
