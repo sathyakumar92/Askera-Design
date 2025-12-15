@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,440 +20,578 @@
         gtag('js', new Date());
         gtag('config', 'G-QSLNPKZ0F9');
     </script>
-    <title>ASKera Design - Graphic Design Agency</title>
-    <link rel="icon" type="image/png" href="ASKera.png">
-
-    <!-- Google Fonts -->
+    <title>ASKera Design | Logo Design Agency</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome (for icons) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Your Final CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
 </head>
-
 <body>
-
-    <!-- Header & Navbar -->
-    <header class="header">
-        <nav class="navbar container">
-            <a href="#hero" class="nav-logo">ASKera Design</a>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
-                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#blog" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="#portfolio" class="nav-link">Work</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link btn btn-primary-outline">Get a Quote</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="hero" class="hero-section">
-            <div class="video-background"><video autoplay loop muted playsinline>
-                    <source src="askera brand.mp4" type="video/mp4">Your browser does not support the video tag.
-                </video></div>
-            <div class="hero-overlay"></div>
-            <div class="hero-content container">
-                <h1 class="animate-on-scroll">Design That Elevates Brands.</h1>
-                <p class="animate-on-scroll">A strategic design agency partner for ambitious businesses.</p>
-                <div class="hero-cta animate-on-scroll">
-                    <a href="#portfolio" class="btn btn-primary">Explore Our Portfolio <i
-                            class="fa-solid fa-arrow-right"></i></a>
-                    <a href="tel:+919042171585" class="btn btn-secondary">Schedule a Call</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="about-section">
-            <div class="container about-content">
-                <div class="about-text animate-on-scroll">
-                    <div class="section-title">
-                        <p>Who We Are</p>
-                        <h2>Strategic & Creative Partners</h2>
-                    </div>
-                    <p>ASKera Design is more than a design agency; we are architects of brand perception. We merge
-                        strategic thinking with outstanding creative to craft designs that are not only beautiful but
-                        also goal-driven and impactful.</p>
-                    <p>Our collaborative process ensures your vision is at the core of everything we build, resulting in
-                        digital experiences that resonate with your audience and deliver tangible results.</p>
-                </div>
-                <div class="about-image-wrapper animate-on-scroll"><img src="ASKera.png"
-                        alt="ASKera Design Team Collaboration"></div>
-            </div>
-        </section>
-
-        <!-- Why Choose Us Section -->
-        <section id="why-choose-us" class="why-choose-us-section">
-            <div class="container">
-                <div class="section-title animate-on-scroll">
-                    <p>Our Advantage</p>
-                    <h2>The ASKera Difference</h2>
-                </div>
-                <div class="why-grid">
-                    <div class="why-card animate-on-scroll">
-                        <div class="icon-wrapper"><i class="fa-solid fa-bullseye"></i></div>
-                        <h3>Precision & Purpose</h3>
-                        <p>Every design choice is deliberate, data-informed, and aligned with your business objectives
-                            for maximum impact.</p>
-                    </div>
-                    <div class="why-card animate-on-scroll">
-                        <div class="icon-wrapper"><i class="fa-solid fa-handshake"></i></div>
-                        <h3>Seamless Collaboration</h3>
-                        <p>We see ourselves as an extension of your team, maintaining transparent communication
-                            throughout the project lifecycle.</p>
-                    </div>
-                    <div class="why-card animate-on-scroll">
-                        <div class="icon-wrapper"><i class="fa-solid fa-gem"></i></div>
-                        <h3>Uncompromising Quality</h3>
-                        <p>Our commitment to excellence ensures a pixel-perfect, polished final product that you can be
-                            proud of.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Blog Section (Integrated Design) -->
-        <section id="blog" class="blog-section section-light">
-            <div class="container">
-                <div class="section-title animate-on-scroll">
-                    <p>Insights & Ideas</p>
-                    <h2>From Our Blog</h2>
-                </div>
-                <div class="blog-tabs animate-on-scroll">
-                    <button class="blog-tab-btn active" data-target="post-1">Branding</button>
-                    <button class="blog-tab-btn" data-target="post-2">UI/UX Trends</button>
-                    <button class="blog-tab-btn" data-target="post-3">Packaging</button>
-                </div>
-                <div class="blog-content-container animate-on-scroll">
-                    <article id="post-1" class="blog-post-content active">
-                        <div class="post-featured-image"><img
-                                src="blog1.jpg"
-                                alt="Abstract color swatches representing branding psychology"></div>
-                        <div class="post-text-content">
-                            <div class="post-meta"><span><i class="fas fa-tag"></i> Branding</span><span><i
-                                        class="fas fa-calendar-alt"></i> July 11, 2025</span></div>
-                            <h2>The Psychology of Color in Modern Branding</h2>
-                            <p class="lead">Color is more than just a visual element; it's a powerful tool that can
-                                influence mood, convey meaning, and drive purchasing decisions.</p>
-                            <p>For any brand, understanding the psychology of color isn't just an artistic exercise—it's
-                                a strategic necessity. For example, blue often conveys trust and security, making it a
-                                favorite for banks, while red evokes passion and urgency, ideal for food brands.</p>
-                            <blockquote>The best color in the whole world is the one that best represents your brand's
-                                personality and values.</blockquote>
-                            <p>We help our clients choose a palette that not only looks great but also aligns perfectly
-                                with their strategic goals, ensuring their brand message is seen and felt correctly by
-                                their target audience.</p>
-                        </div>
-                    </article>
-                    <article id="post-2" class="blog-post-content">
-                        <div class="post-featured-image"><img
-                                src="blog2.jpg"
-                                alt="Modern mobile app interface design"></div>
-                        <div class="post-text-content">
-                            <div class="post-meta"><span><i class="fas fa-tag"></i> UI/UX Design</span><span><i
-                                        class="fas fa-calendar-alt"></i> July 11, 2025</span></div>
-                            <h2>5 UI/UX Trends Dominating the Digital Space in 2024</h2>
-                            <p class="lead">In the fast-paced digital world, user expectations are constantly evolving.
-                                Staying ahead of UI/UX trends is key to creating engaging and effective products.</p>
-                            <p>This year, we're seeing a huge emphasis on hyper-personalization, where interfaces adapt
-                                to individual user behavior. Another major trend is the rise of voice user interfaces
-                                (VUI) and AI-driven assistance, making interactions more conversational and intuitive.
-                            </p>
-                            <blockquote>A great user experience doesn't just happen, it's designed with intent, empathy,
-                                and a deep understanding of the user.</blockquote>
-                            <p>From immersive 3D elements to minimalist designs that prioritize content, we are focused
-                                on implementing trends that not only look modern but fundamentally improve usability and
-                                drive conversions for our clients.</p>
-                        </div>
-                    </article>
-                    <article id="post-3" class="blog-post-content">
-                        <div class="post-featured-image"><img
-                                src="blog3.jpg"
-                                alt="Sleek and modern product packaging on a shelf"></div>
-                        <div class="post-text-content">
-                            <div class="post-meta"><span><i class="fas fa-tag"></i> Package Design</span><span><i
-                                        class="fas fa-calendar-alt"></i> July 11, 2025</span></div>
-                            <h2>From Sketch to Shelf: A Guide to Packaging Design</h2>
-                            <p class="lead">Product packaging is often the first physical interaction a customer has
-                                with your brand. It’s a silent salesman on a crowded shelf.</p>
-                            <p>The journey from a simple idea to a tangible, eye-catching package involves deep
-                                strategic thinking. It's about more than just a logo; it's about material choice,
-                                structural design, typography, and sustainability. A successful package must protect the
-                                product, inform the customer, and tell the brand's story—all in a matter of seconds.</p>
-                            <blockquote>Great packaging protects your product. Brilliant packaging protects your brand.
-                            </blockquote>
-                            <p>We guide our clients through this entire process, ensuring the final design is not only
-                                beautiful and functional but also manufacturable and aligned with their brand's core
-                                values.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="services-section">
-            <div class="container">
-                <div class="section-title animate-on-scroll">
-                    <p>Our Capabilities</p>
-                    <h2>A Full Suite of Design Services</h2>
-                </div>
-                <div class="services-grid">
-                    <div class="service-card animate-on-scroll"><i class="fa-solid fa-pen-ruler"></i>
-                        <h3>Logo & Brand Identity</h3>
-                        <p>Crafting unique visual systems that tell your brand's story and establish a memorable
-                            presence.</p>
-                    </div>
-                    <div class="service-card animate-on-scroll"><i class="fa-solid fa-mobile-screen-button"></i>
-                        <h3>UI/UX for Web & Mobile</h3>
-                        <p>Designing intuitive, engaging, and user-centric interfaces for digital products.</p>
-                    </div>
-                    <div class="service-card animate-on-scroll"><i class="fa-solid fa-desktop"></i>
-                        <h3>Corporate Web Design</h3>
-                        <p>Building responsive, fast, and visually stunning websites that drive business growth.</p>
-                    </div>
-                    <div class="service-card animate-on-scroll"><i class="fa-solid fa-box-archive"></i>
-                        <h3>Packaging Design</h3>
-                        <p>Creating compelling packaging that captures attention and communicates product value.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="portfolio-section">
-            <div class="container">
-                <div class="section-title animate-on-scroll">
-                    <p>Our Work</p>
-                    <h2>Selected Case Studies</h2>
-                </div>
-                <div class="portfolio-filters animate-on-scroll">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="logo">Logo</button>
-                    <button class="filter-btn" data-filter="uiux">UI/UX</button>
-                    <button class="filter-btn" data-filter="web">Web Design</button>
-                    <button class="filter-btn" data-filter="package">Package Design</button>
-                </div>
-                <div class="portfolio-grid">
-                    <!-- Your portfolio images go here -->
-                    <div class="portfolio-item animate-on-scroll" data-category="logo"><img src="1.png"
-                            alt="Logo Design 1"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="logo"><img src="2.png"
-                            alt="Logo Design 2"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="logo"><img src="3.png"
-                            alt="Logo Design 3"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="logo"><img src="4.png"
-                            alt="Logo Design 4"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="logo"><img src="5.png"
-                            alt="Logo Design 5"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="uiux"><img src="ui1.png"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="uiux"><img src="ui2.png"
-                            alt="UI/UX Design 2"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="uiux"><img src="ui3.jpg"
-                            alt="UI/UX Design 3"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="uiux"><img src="ui4.jpg"
-                            alt="UI/UX Design 4"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="uiux"><img src="ui5.jpg"
-                            alt="UI/UX Design 5"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="web"><img src="web1.jpg"
-                            alt="Web Design 1"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="web"><img src="web2.jpg"
-                            alt="Web Design 2"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="web"><img src="web3.jpg"
-                            alt="Web Design 3"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="web"><img src="web4.png"
-                            alt="Web Design 4"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="web"><img src="web5.png"
-                            alt="Web Design 5"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="package"><img src="Package-one.jpg"
-                            alt="Package Design 1"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="package"><img src="Package-two.jpg"
-                            alt="Package Design 2"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="package"><img src="Package-three.jpg"
-                            alt="Package Design 3"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="package"><img src="Package-four.jpg"
-                            alt="Package Design 4"></div>
-                    <div class="portfolio-item animate-on-scroll" data-category="package"><img src="Package-five.jpg"
-                            alt="Package Design 5"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Client Review Section -->
-        <section id="reviews" class="reviews-section section-light">
-            <div class="container">
-                <div class="section-title animate-on-scroll">
-                    <p>Testimonials</p>
-                    <h2>Trusted by Industry Leaders</h2>
-                </div>
-                <div class="review-grid">
-                    <div class="review-card animate-on-scroll">
-                        <div class="review-header"><img src="Client_Five girl.jpg" alt="Client 1">
-                            <div>
-                                <h4>Sarah L., Tech Startup CEO</h4>
-                                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p>"ASKera Design transformed our app's UI/UX. The user engagement has skyrocketed. Truly a
-                            game-changing partnership!"</p>
-                    </div>
-                    <div class="review-card animate-on-scroll">
-                        <div class="review-header"><img src="Client_Four boy.jpg" alt="Client 2">
-                            <div>
-                                <h4>Mark P., Restaurant Owner</h4>
-                                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p>"The branding and logo they created for us were perfect. They captured the essence of our
-                            restaurant beautifully."</p>
-                    </div>
-                    <div class="review-card animate-on-scroll">
-                        <div class="review-header"><img src="Client_Six girl.jpg" alt="Client 3">
-                            <div>
-                                <h4>Rani C., E-commerce Manager</h4>
-                                <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p>"Incredible web design and very professional team. Our new site is not only beautiful but
-                            also much faster."</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Terms and Conditions Section -->
-        <section id="terms" class="terms-section section-light">
-            <div class="container">
-                <div class="section-title animate-on-scroll">
-                    <p>Our Policies</p>
-                    <h2>Terms of Service</h2>
-                </div>
-                <div class="terms-container animate-on-scroll">
-                    <div class="terms-disclaimer"><strong>Disclaimer:</strong> This is a general template for
-                        informational purposes. It is not legal advice. Please consult a qualified legal professional in
-                        India to draft terms suitable for your business.</div>
-                    <h3>1. Agreement & Services</h3>
-                    <p>These terms govern the services provided by ASKera Design ("Agency") to you ("Client"). The
-                        specific services, deliverables, and timelines will be outlined in a separate Scope of Work
-                        (SOW) document, which, upon agreement, forms part of this contract.</p>
-                    <h3>2. Payment Terms</h3>
-                    <ul>
-                        <li>An advance payment of <strong>50% of the total project cost</strong> is required before any
-                            work begins. This is non-refundable.</li>
-                        <li>The remaining <strong>50% is due upon project completion</strong>, prior to the delivery of
-                            final, high-resolution source files.</li>
-                        <li>All payments are to be made via bank transfer or the payment gateway provided.</li>
-                        <li>All quoted fees are exclusive of <strong>Goods and Services Tax (GST)</strong>. The
-                            applicable GST rate will be added to each invoice as per Indian law.</li>
-                    </ul>
-                    <h3>3. Revisions & Scope Creep</h3>
-                    <p>The project fee includes a set number of revision rounds (typically two) as defined in the SOW.
-                        Additional revisions or significant changes to the scope after project commencement will be
-                        subject to additional charges at our standard hourly rate.</p>
-                    <h3>4. Intellectual Property Rights</h3>
-                    <p>Upon receipt of full and final payment, the Agency grants the Client full intellectual property
-                        rights for the final, approved design. The Agency retains the right to display the work in its
-                        portfolio, website, and other promotional materials for marketing purposes.</p>
-                    <h3>5. Confidentiality</h3>
-                    <p>Both parties agree to keep all confidential information, including business strategies and
-                        proprietary data, private and not to disclose it to any third party.</p>
-                    <h3>6. Termination</h3>
-                    <p>If the Client chooses to terminate the project, the initial 50% advance is forfeited. If the
-                        project is more than 50% complete at the time of termination, a pro-rated fee for work completed
-                        will be assessed and invoiced.</p>
-                    <h3>7. Governing Law and Jurisdiction</h3>
-                    <p>This agreement shall be governed by and construed in accordance with the laws of India. Any
-                        disputes arising out of this agreement shall be subject to the exclusive jurisdiction of the
-                        courts in <strong>Mumbai, India</strong>.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section">
-            <div class="container contact-wrapper">
-                <div class="contact-text animate-on-scroll">
-                    <div class="section-title">
-                        <p>Let's Talk</p>
-                        <h2>Have a Project?</h2>
-                    </div>
-                    <p>We're ready to listen. Fill out the form, and a member of our team will be in touch shortly to
-                        discuss your project goals.</p>
-                    <div class="contact-info">
-                        <ul>
-                            <li><i class="fas fa-map-marker-alt"></i> India , Tamil Nadu , Nagercoil , 629806</li>
-                            <li><i class="fas fa-envelope"></i> <a
-                                    href="mailto:hello@askeradesign.com">sathya92.kumar28@gmail.com</a></li>
-                        </ul>
-                    </div>
-                    <div class="social-links animate-on-scroll">
-                        <h4>Follow Us</h4>
-                        <div class="social-icons">
-                            <a href="https://www.facebook.com/sklogosera/" target="_blank"
-                                aria-label="Visit our first Facebook page"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.facebook.com/ASKeraDesign/" target="_blank"
-                                aria-label="Visit our second Facebook page"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.instagram.com/askeradesign/" target="_blank"
-                                aria-label="Visit our Instagram profile"><i class="fab fa-instagram"></i></a>
-                            <a href="https://www.linkedin.com/in/sathya-kumar-3278a7263/" target="_blank"
-                                aria-label="Visit our LinkedIn profile"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://wa.me/+919042171585" target="_blank"
-                                aria-label="Chat with us on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="contact-form-wrapper animate-on-scroll">
-                    <form id="contact-form">
-                        <div class="form-group"><input type="text" id="name" name="name" required><label for="name">Your
-                                Name</label></div>
-                        <div class="form-group"><input type="email" id="email" name="email" required><label
-                                for="email">Your Email</label></div>
-                        <div class="form-group"><textarea id="message" name="message" rows="5"
-                                required></textarea><label for="message">Project Details</label></div>
-                        <div id="form-status"></div>
-                        <button type="submit" class="btn btn-primary">Submit Inquiry <i
-                                class="fa-solid fa-paper-plane"></i></button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
         <div class="container">
-            <p>© 2024 ASKera Design. A Professional Design Agency.</p>
+            <a href="#home" class="logo">ASKera <span class="design-text">Design</span></a>
+            
+            <!-- Hamburger Menu -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="uiux.html">Case Studies</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#terms">Terms</a></li>
+                <li><a href="#contact" class="btn btn-primary">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="askera brand.mp4" type="video/mp4">
+        </video>
+        
+        <div class="hero-overlay"></div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text fade-in">
+                    <h1>Transform Your Brand with <span class="highlight">Premium Design</span></h1>
+                    <p class="hero-subtitle">We create stunning visual identities and digital experiences that make your business stand out in the modern marketplace. From logos to complete brand systems, we deliver excellence.</p>
+                    <div class="hero-cta">
+                        <a href="tel:+919042171585" class="btn btn-call-me">
+                            <i class="fas fa-phone-alt"></i> Call Me
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">What We Do</span>
+                <h2 class="section-title">Core <span class="highlight">Systems</span></h2>
+                <p class="section-desc">Comprehensive design solutions for the modern age. We combine strategic thinking with technical excellence to deliver results.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Strategy & Branding</h3>
+                    <p>We deconstruct your market position and reconstruct a visual identity that dominates through comprehensive brand architecture and positioning.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Graphic Design</h3>
+                    <p>Logos, branding kits, and marketing materials that stand out in a crowded market with timeless aesthetic principles.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Full-Stack Development</h3>
+                    <p>React, WebGL, Node.js. We build scalable, high-performance applications wrapped in luxury design and optimized for speed.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Applications</h3>
+                    <p>User-centric mobile application interfaces designed for engagement, retention, and seamless cross-platform experiences.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3>3D Visuals</h3>
+                    <p>Immersive 3D elements and mockups to give your product a realistic feel that captivates and converts.</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>SEO & Strategy</h3>
+                    <p>Data-driven strategies to ensure your beautiful site gets seen by the right people at the right time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms & Engagement -->
+    <section id="terms" class="section terms-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Engagement</span>
+                <h2 class="section-title">Partnership <span class="highlight">Protocol</span></h2>
+                <p class="section-desc">Transparent processes designed for seamless collaboration across borders.</p>
+            </div>
+            
+            <div class="terms-grid">
+                <!-- International Clients -->
+                <div class="term-card global fade-in-left">
+                    <h3><i class="fas fa-globe"></i> Global Clients</h3>
+                    <p class="term-subtitle">USA • UK • EUROPE • UAE</p>
+                    <ul class="term-list">
+                        <li><i class="fas fa-check-circle"></i> Payments: PayPal, Wise</li>
+                        <li><i class="fas fa-check-circle"></i> 50% Upfront / 50% on Delivery</li>
+                        <li><i class="fas fa-check-circle"></i> Standard Contract Agreement</li>
+                        <li><i class="fas fa-check-circle"></i> 2 Rounds of Revisions Included</li>
+                        <li><i class="fas fa-check-circle"></i> Full Intellectual Property Transfer</li>
+                    </ul>
+                </div>
+                
+                <!-- Indian Clients -->
+                <div class="term-card india fade-in-right">
+                    <h3><i class="fas fa-flag"></i> Indian Clients</h3>
+                    <p class="term-subtitle">DOMESTIC PARTNERS</p>
+                    <ul class="term-list">
+                        <li><i class="fas fa-check-circle"></i> Payments: UPI, NEFT, IMPS</li>
+                        <li><i class="fas fa-check-circle"></i> GST Invoicing Available</li>
+                        <li><i class="fas fa-check-circle"></i> 50% Booking Fee Required</li>
+                        <li><i class="fas fa-check-circle"></i> Localized Support Hours (9 AM - 8 PM IST)</li>
+                        <li><i class="fas fa-check-circle"></i> Regional Language Support Available</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Reviews - Premium 3D Carousel with Autoplay -->
+    <section class="section reviews-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Testimonials</span>
+                <h2 class="section-title">Client <span class="highlight">Voices</span></h2>
+                <p class="section-desc">Real feedback from real clients across the globe. Excellence recognized worldwide.</p>
+            </div>
+            
+            <div class="carousel-wrapper">
+                <div class="carousel-container">
+                    <div class="carousel-3d" id="reviewCarousel">
+                        <!-- Review 1 - James Holden -->
+                        <div class="review-card-3d" data-index="0">
+                            <div class="card-shine"></div>
+                            <div class="review-header">
+                                <div class="client-avatar">
+                                    <img src="clients/client1.png" alt="James Holden">
+                                    <div class="avatar-glow"></div>
+                                </div>
+                                <div class="client-info">
+                                    <h4>James Holden</h4>
+                                    <p>CEO, Expanse Tech</p>
+                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> San Francisco, USA</span>
+                                </div>
+                            </div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="rating-number">5.0</span>
+                            </div>
+                            <p class="review-text">"Absolutely mind-bending design. The holographic feel is exactly what our tech startup needed. ASKera delivered beyond expectations with exceptional attention to detail and innovative solutions that transformed our digital presence."</p>
+                            <div class="review-footer">
+                                <div class="verified-badge">
+                                    <i class="fas fa-check-circle"></i> Verified Client
+                                </div>
+                                <div class="review-date">
+                                    <i class="fas fa-calendar"></i> November 2024
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 2 - Aarav Patel -->
+                        <div class="review-card-3d" data-index="1">
+                            <div class="card-shine"></div>
+                            <div class="review-header">
+                                <div class="client-avatar">
+                                    <img src="clients/client2.png" alt="Aarav Patel">
+                                    <div class="avatar-glow"></div>
+                                </div>
+                                <div class="client-info">
+                                    <h4>Aarav Patel</h4>
+                                    <p>Founder, Mumbai Startups</p>
+                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> Mumbai, India</span>
+                                </div>
+                            </div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="rating-number">5.0</span>
+                            </div>
+                            <p class="review-text">"Professionalism at its peak. The Indian payment process was smooth and GST compliant. Highly recommend for domestic projects that need international quality standards and impeccable execution."</p>
+                            <div class="review-footer">
+                                <div class="verified-badge">
+                                    <i class="fas fa-check-circle"></i> Verified Client
+                                </div>
+                                <div class="review-date">
+                                    <i class="fas fa-calendar"></i> October 2024
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 3 - Sarah Connor -->
+                        <div class="review-card-3d" data-index="2">
+                            <div class="card-shine"></div>
+                            <div class="review-header">
+                                <div class="client-avatar">
+                                    <img src="clients/client3.png" alt="Sarah Connor">
+                                    <div class="avatar-glow"></div>
+                                </div>
+                                <div class="client-info">
+                                    <h4>Sarah Connor</h4>
+                                    <p>CTO, SkyNet Solutions</p>
+                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> London, UK</span>
+                                </div>
+                            </div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="rating-number">5.0</span>
+                            </div>
+                            <p class="review-text">"Fast, efficient code. The web3 integration was flawless. They understand modern tech stacks better than anyone I've worked with in the industry. Truly cutting-edge development expertise."</p>
+                            <div class="review-footer">
+                                <div class="verified-badge">
+                                    <i class="fas fa-check-circle"></i> Verified Client
+                                </div>
+                                <div class="review-date">
+                                    <i class="fas fa-calendar"></i> December 2024
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 4 - Jean-Luc Moreau -->
+                        <div class="review-card-3d" data-index="3">
+                            <div class="card-shine"></div>
+                            <div class="review-header">
+                                <div class="client-avatar">
+                                    <img src="clients/client4.png" alt="Jean-Luc Moreau">
+                                    <div class="avatar-glow"></div>
+                                </div>
+                                <div class="client-info">
+                                    <h4>Jean-Luc Moreau</h4>
+                                    <p>Director, Paris Design Co.</p>
+                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> Paris, France</span>
+                                </div>
+                            </div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="rating-number">5.0</span>
+                            </div>
+                            <p class="review-text">"They handled our international transfer perfectly using Wise. Communication was excellent throughout the entire project. Would absolutely work with them again. Exceptional design sensibility."</p>
+                            <div class="review-footer">
+                                <div class="verified-badge">
+                                    <i class="fas fa-check-circle"></i> Verified Client
+                                </div>
+                                <div class="review-date">
+                                    <i class="fas fa-calendar"></i> September 2024
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 5 - Naomi Nakamura -->
+                        <div class="review-card-3d" data-index="4">
+                            <div class="card-shine"></div>
+                            <div class="review-header">
+                                <div class="client-avatar">
+                                    <img src="clients/client5.jpg" alt="Naomi Nakamura">
+                                    <div class="avatar-glow"></div>
+                                </div>
+                                <div class="client-info">
+                                    <h4>Naomi Nakamura</h4>
+                                    <p>Creative Director, Tokyo</p>
+                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> Tokyo, Japan</span>
+                                </div>
+                            </div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="rating-number">5.0</span>
+                            </div>
+                            <p class="review-text">"A visual masterpiece. Highly recommended for premium brands who want to stand out in the digital space with sophisticated design solutions. The attention to aesthetics is remarkable."</p>
+                            <div class="review-footer">
+                                <div class="verified-badge">
+                                    <i class="fas fa-check-circle"></i> Verified Client
+                                </div>
+                                <div class="review-date">
+                                    <i class="fas fa-calendar"></i> August 2024
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 6 - Additional Client -->
+                        <div class="review-card-3d" data-index="5">
+                            <div class="card-shine"></div>
+                            <div class="review-header">
+                                <div class="client-avatar">
+                                    <img src="clients/client6.jpg" alt="Michael Chen">
+                                    <div class="avatar-glow"></div>
+                                </div>
+                                <div class="client-info">
+                                    <h4>Michael Chen</h4>
+                                    <p>CEO, Digital Ventures</p>
+                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> Singapore</span>
+                                </div>
+                            </div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="rating-number">5.0</span>
+                            </div>
+                            <p class="review-text">"Working with ASKera was a game-changer for our business. Their strategic approach to design combined with technical excellence resulted in a 300% increase in user engagement."</p>
+                            <div class="review-footer">
+                                <div class="verified-badge">
+                                    <i class="fas fa-check-circle"></i> Verified Client
+                                </div>
+                                <div class="review-date">
+                                    <i class="fas fa-calendar"></i> July 2024
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Carousel Controls -->
+                <div class="carousel-controls fade-in">
+                    <button class="carousel-btn carousel-btn-prev" onclick="rotateCarousel('prev')" aria-label="Previous review">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="carousel-indicators" id="carouselIndicators">
+                        <span class="indicator active" data-slide="0"></span>
+                        <span class="indicator" data-slide="1"></span>
+                        <span class="indicator" data-slide="2"></span>
+                        <span class="indicator" data-slide="3"></span>
+                        <span class="indicator" data-slide="4"></span>
+                        <span class="indicator" data-slide="5"></span>
+                    </div>
+                    
+                    <button class="carousel-btn carousel-btn-next" onclick="rotateCarousel('next')" aria-label="Next review">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Autoplay Toggle -->
+                <div class="carousel-autoplay-toggle">
+                    <button class="autoplay-btn" id="autoplayToggle" onclick="toggleAutoplay()">
+                        <i class="fas fa-pause"></i>
+                        <span>Autoplay On</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Get in Touch</span>
+                <h2 class="section-title">Start Your <span class="highlight">Project</span></h2>
+                <p class="section-desc">Ready to transform your digital presence? Let's create something exceptional together.</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info fade-in-left">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email Address</h4>
+                            <p>sathya92.kumar28@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone Number</h4>
+                            <p>+91 90421 71585</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Tamil Nadu, India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                           <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Business Hours</h4>
+                            <p>Mon - Sat: 9:00 AM - 8:00 PM IST</p>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                
+                <form class="contact-form fade-in-right" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="f04efbf8-e6a1-4784-9d88-3885f0374d82">
+                    
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="john@company.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Tell us about your project requirements..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Footer -->
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="footer-top">
+                <!-- Column 1: Brand & About -->
+                <div class="footer-column">
+                    <a href="index.html" class="logo">ASKera <span class="design-text">Design</span></a>
+                    <p class="footer-desc">Elevating brands through premium design and innovative digital solutions. Let's build the future together.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/sklogosera" target="_blank" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/askeradesign/" target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/sathya-kumar-3278a7263/" target="_blank" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/919042171585" target="_blank" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Quick Links -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="uiux.html">Case Studies</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="index.html#contact">Start a Project</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Services -->
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="index.html#services">Brand Identity</a></li>
+                        <li><a href="index.html#services">Web Design</a></li>
+                        <li><a href="index.html#services">UI/UX Design</a></li>
+                        <li><a href="index.html#services">Motion Graphics</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4: Contact -->
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact-list">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>sathya92.kumar28@gmail.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 90421 71585</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Tamil Nadu, India</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 ASKera Design. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Portfolio Modal / Lightbox -->
-    <div class="portfolio-modal">
-        <span class="close-modal">×</span>
-        <img class="modal-content" id="modal-img">
-    </div>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-    <!-- Final JS -->
     <script src="script.js"></script>
+    <script src="hamburger.js"></script>
 </body>
-
 </html>
