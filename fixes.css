@@ -1,0 +1,371 @@
+/* ==========================================
+   ADDITIONAL FIXES & OPTIMIZATIONS
+   ========================================== */
+
+/* Ensure smooth transitions for all interactive elements */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix for hamburger button in navbar */
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* Ensure nav menu stays hidden on desktop */
+@media (min-width: 992px) {
+    .hamburger {
+        display: none !important;
+    }
+
+    .nav-menu {
+        display: flex !important;
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        flex-direction: row !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        transform: none !important;
+        overflow: visible !important;
+    }
+
+    .menu-overlay {
+        display: none !important;
+    }
+}
+
+/* Fix for contact grid */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(10px);
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--copper), var(--copper-light));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-icon i {
+    font-size: 1.5rem;
+    color: var(--navy-deep);
+}
+
+.contact-details h4 {
+    color: var(--copper);
+    font-size: 1rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-details p {
+    color: var(--cream);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Contact Form Styling */
+.contact-form {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 40px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--copper);
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--cream);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--copper);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+textarea.form-control {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--copper), var(--copper-light));
+    border: none;
+    border-radius: 50%;
+    color: var(--navy-deep);
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 9997;
+    box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+}
+
+/* Footer Styling */
+.footer {
+    background: var(--navy-deep);
+    border-top: 1px solid rgba(212, 165, 116, 0.2);
+    padding: 40px 0;
+    margin-top: 80px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-content p {
+    color: var(--cream);
+    margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--cream);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+    color: var(--copper);
+}
+
+/* Prevent layout shift */
+.navbar {
+    will-change: transform;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-overflow-scrolling: touch) {
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Performance optimizations */
+.service-card,
+.pricing-card,
+.case-study,
+.review-card-3d {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Fix text rendering */
+body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure buttons are always clickable */
+button,
+a,
+.btn {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Fix for input fields on iOS */
+input,
+textarea {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+
+/* Loading state utility */
+.loading {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Success/Error states */
+.success-state {
+    border-color: #10B981 !important;
+}
+
+.error-state {
+    border-color: #EF4444 !important;
+}
+
+/* Accessibility focus states */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--copper);
+    outline-offset: 2px;
+}
+
+/* Prevent horizontal scroll */
+body {
+    overflow-x: hidden;
+}
+
+/* Fix for modal/overlay z-index stacking */
+.menu-overlay {
+    z-index: 9998;
+}
+
+.nav-menu {
+    z-index: 10000;
+}
+
+.navbar {
+    z-index: 9999;
+}
+
+/* Ensure smooth font loading - handled by Google Fonts */
+
+/* ==========================================
+   CRITICAL NAVBAR VISIBILITY FIX
+   ========================================== */
+
+/* Force navbar menu to be visible on desktop */
+@media (min-width: 992px) {
+    .nav-menu {
+        opacity: 1 !important;
+        visibility: visible !important;
+        right: auto !important;
+        gap: 40px !important;
+        list-style: none !important;
+    }
+
+    .nav-menu li {
+        display: block !important;
+        margin: 0 !important;
+        width: auto !important;
+        opacity: 1 !important;
+    }
+
+    .nav-menu li a {
+        color: var(--cream) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: inline-block !important;
+        padding: 8px 0 !important;
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+        text-decoration: none !important;
+        transition: color 0.3s ease !important;
+    }
+
+    .nav-menu li a:hover {
+        color: var(--copper) !important;
+    }
+
+    .nav-menu li a.btn {
+        padding: 14px 32px !important;
+        border-radius: 50px !important;
+    }
+}
+
+/* Force navbar items to be always visible */
+.navbar .nav-menu {
+    display: flex;
+}
+
+.navbar .nav-menu li {
+    display: block;
+}
+
+.navbar .nav-menu a {
+    color: var(--cream);
+    font-weight: 500;
+}
