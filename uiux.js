@@ -1,115 +1,172 @@
-// Case Study Page JavaScript with Modal Logic
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Case Study Page Loaded');
-
-    // 1. Fade-in Animation on Scroll
-    const fadeElements = document.querySelectorAll('.fade-in, .fade-in-up');
+document.addEventListener('DOMContentLoaded', () => {
+    // ==========================================
+    // 3D Cylinder Ring Slider Logic
+    // ==========================================
+    const container = document.querySelector('.coverflow-container');
+    const items = Array.from(document.querySelectorAll('.coverflow-item'));
     
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // For custom inline styles handling if needed, but CSS animation handles most
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.1 });
+    // Cylinder Configuration
+    const itemCount = items.length;
+    const anglePerItem = 360 / itemCount;
+    const radius = Math.round((400 / 2) / Math.tan(Math.PI / itemCount)); // Calculate approx radius based on item width (400px)
     
-    fadeElements.forEach(element => {
-        // Initial state set in CSS usually, ensuring JS reinforces it
-        fadeObserver.observe(element);
+    let currentAngle = 0;
+    let autoRotateSpeed = 0.2; // Degrees per frame
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    let dragSpeed = 0;
+    let animationId;
+    let isPaused = false;
+    
+    // Initial Setup: Arranging items in a circle
+    items.forEach((item, index) => {
+        const angle = index * anglePerItem;
+        // rotateY to face center, translateZ to push out to radius
+        item.style.transform = `rotateY(${angle}deg) translateZ(${radius + 50}px)`;
+        item.dataset.angle = angle;
     });
-
-
-    // 2. PROJECT MODAL LOGIC
+    
+    // Main Animation Loop
+    function animate() {
+        if (!isDragging && !isPaused) {
+            currentAngle -= autoRotateSpeed; // Rotate whole ring
+        } else if (isDragging) {
+            // Inertia or direct drag could be handled here, 
+            // but for simplicity we update currentAngle in touch events
+        } else if (!isDragging && Math.abs(dragSpeed) > 0.01) {
+            // Inertia/Decay after drag
+            currentAngle -= dragSpeed;
+            dragSpeed *= 0.95; // Decay
+        }
+        
+        container.style.transform = `translateZ(-${radius + 300}px) rotateY(${currentAngle}deg)`;
+        
+        animationId = requestAnimationFrame(animate);
+    }
+    
+    // start animation
+    animate();
+    
+    // ==========================================
+    // Interaction: Drag to Rotate
+    // ==========================================
+    const wrapper = document.querySelector('.coverflow-wrapper');
+    
+    // Mouse Events
+    wrapper.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        dragSpeed = 0;
+        wrapper.style.cursor = 'grabbing';
+    });
+    
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - startX;
+        const sensitivity = 0.5;
+        currentAngle += deltaX * sensitivity;
+        dragSpeed = -(deltaX * sensitivity); // Store speed for inertia
+        startX = e.clientX;
+    });
+    
+    window.addEventListener('mouseup', () => {
+        isDragging = false;
+        wrapper.style.cursor = 'grab';
+    });
+    
+    // Touch Events
+    wrapper.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        dragSpeed = 0;
+    }, {passive: false});
+    
+    wrapper.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault(); // Prevent scroll while rotating
+        const deltaX = e.touches[0].clientX - startX;
+        const sensitivity = 0.5;
+        currentAngle += deltaX * sensitivity;
+        dragSpeed = -(deltaX * sensitivity);
+        startX = e.touches[0].clientX;
+    }, {passive: false});
+    
+    window.addEventListener('touchend', () => {
+        isDragging = false;
+    });
+    
+    // Pause on Hover
+    // Pause rotation when hovering over an item to read/click
+    items.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            isPaused = true;
+        });
+        item.addEventListener('mouseleave', () => {
+            isPaused = false;
+        });
+    });
+    
+    
+    // ==========================================
+    // Modal Logic
+    // ==========================================
     const modal = document.getElementById('projectModal');
-    const closeBtn = document.querySelector('.close-modal');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    // Modal Elements to Populate
+    const closeModalBtn = document.querySelector('.close-modal');
     const modalImg = document.getElementById('modalImg');
+    const modalCat = document.getElementById('modalCat');
     const modalTitle = document.getElementById('modalTitle');
     const modalDesc = document.getElementById('modalDesc');
-    const modalCat = document.getElementById('modalCat');
     const modalFeatures = document.getElementById('modalFeatures');
-
+    
     // Open Modal
-    projectCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            // Prevent if clicking other interactive elements logic if added later
+    document.querySelectorAll('.view-details-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            isPaused = true; // Ensure paused
             
-            // Get Data from Card
-            const imgSrc = card.querySelector('.project-image img').getAttribute('src');
-            const title = card.querySelector('.project-title').innerText;
-            const category = card.querySelector('.cat-tag').innerText;
+            // Populate Data
+            const parentItem = btn.closest('.coverflow-item');
+            const imgSrc = parentItem.querySelector('img').src;
             
-            // Get Hidden Details
-            const detailsContainer = card.querySelector('.hidden-details');
-            const fullDesc = detailsContainer.querySelector('.detail-desc').innerText;
-            const featuresList = detailsContainer.querySelector('.detail-features').innerHTML;
-            
-            // Optional: Secondary image in detail view
-            // const detailImg = detailsContainer.querySelector('img') ? detailsContainer.querySelector('img').src : imgSrc;
-
-            // Populate Modal
             modalImg.src = imgSrc;
-            modalTitle.innerText = title;
-            modalCat.innerText = category;
-            modalDesc.innerText = fullDesc;
-            modalFeatures.innerHTML = featuresList;
-
-            // Show Modal with Animation
-            modal.style.display = 'block';
-            // Slight delay to allow display:block to apply before opacity transition
-            setTimeout(() => {
-                modal.classList.add('show');
-            }, 10);
+            modalCat.textContent = btn.dataset.cat;
+            modalTitle.textContent = btn.dataset.title;
+            modalDesc.textContent = btn.dataset.desc;
             
-            // Disable body scroll
+            // Features
+            modalFeatures.innerHTML = '';
+            if (btn.dataset.features) {
+                const features = btn.dataset.features.split(', ');
+                features.forEach(feat => {
+                    const li = document.createElement('li');
+                    li.textContent = feat;
+                    modalFeatures.appendChild(li);
+                });
+            }
+            
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         });
     });
-
-    // Close Modal Function
+    
+    // Close Modal
     function closeModal() {
-        modal.classList.remove('show');
-        setTimeout(() => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Re-enable scroll
-        }, 300); // Match transition duration
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        isPaused = false; // Resume
     }
-
-    // Close Events
-    closeBtn.addEventListener('click', closeModal);
     
-    // Close on clicking outside content
-    window.addEventListener('click', function(e) {
-        if (e.target == modal) {
-            closeModal();
-        }
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('show')) {
-            closeModal();
-        }
-    });
-
-
-    // 3. Hero Parallax Effect (Subtle)
-    const heroSection = document.querySelector('.modern-hero');
-    const heroShape = document.querySelector('.hero-abstract-shape');
+    closeModalBtn.addEventListener('click', closeModal);
     
-    if(heroSection && heroShape) {
-        heroSection.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth - e.pageX * 2) / 100;
-            const y = (window.innerHeight - e.pageY * 2) / 100;
-            
-            heroShape.style.transform = `translateX(${x}px) translateY(${y}px)`;
-        });
-    }
+    // Close on click outside
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
 
 });

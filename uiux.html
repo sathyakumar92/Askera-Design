@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ASKera Design Case Studies - Explore our successful branding and web design projects.">
+    <meta name="description" content="ASKera Design - 3D Portfolio Showcase">
     <title>Case Studies | ASKera Design</title>
     
     <!-- Favicon -->
@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
+
     <!-- Navigation -->
     <nav class="navbar scrolled" id="navbar">
         <div class="container">
@@ -39,262 +40,273 @@
         </div>
     </nav>
 
-    <!-- NEW MODERN HERO SECTION -->
+    <!-- Hero Section -->
     <section class="modern-hero">
         <div class="hero-glow"></div>
-        <div class="hero-grid-bg"></div>
-        <div class="container">
-            <div class="hero-content-wrapper">
-                <div class="hero-badge-pill fade-in-up">
-                    <span class="badge-dot"></span> Portfolio 2024-25
-                </div>
-                <h1 class="hero-headline fade-in-up delay-1">
-                    Is Your Brand <br>
-                    <span class="text-gradient">Designed</span> 
-                    To Win?
-                </h1>
-                <p class="hero-subtext fade-in-up delay-2">
-                    We don't just design logos; we engineer brand systems that dominate markets. 
-                    Explore our curated collection of digital masterpieces.
-                </p>
-            </div>
-        </div>
-        
-        <!-- Abstract Decoration -->
-        <div class="hero-abstract-shape">
-            <div class="shape-inner"></div>
+        <div class="hero-content-wrapper">
+            <div class="hero-badge-pill">Selected Works 2024-25</div>
+            <h1 class="hero-headline">
+                Immersive <br>
+                <span class="text-gradient">Portfolio</span> Experience
+            </h1>
+            <p class="hero-subtext">
+                Explore our digital masterpieces in an interactive dimension. 
+                Drag, swipe, or click to navigate our successful case studies.
+            </p>
         </div>
     </section>
 
-    <!-- Projects Grid -->
-    <section class="portfolio-section">
-        <div class="container">
-            <div class="projects-grid">
-                
-                <!-- Project 1 -->
-                <div class="project-card fade-in" data-project-id="1">
-                    <div class="project-image">
-                        <img src="case studies/logo1.jpg" alt="Aurora Stream Branding">
-                        <div class="project-overlay">
-                            <span class="view-btn"><i class="fas fa-expand-alt"></i> View Case Study</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="cat-tag">Branding</div>
-                        <h3 class="project-title">Aurora Stream</h3>
-                        <p class="project-brief">Premium identity for a next-gen streaming platform.</p>
-                        <div class="hidden-details">
-                            <p class="detail-desc">Aurora Stream needed a brand that felt limitless. We designed a sleek, golden-gradient identity with dynamic motion elements to represent the continuous flow of entertainment.</p>
-                            <ul class="detail-features">
-                                <li>Brand Identity</li>
-                                <li>Motion Assets</li>
-                                <li>Digital Marketing</li>
-                            </ul>
-                            <div class="detail-images">
-                                <img src="case studies/logo1.jpg" alt="Detail View">
+    <!-- 3D Coverflow Portfolio Section -->
+    <section class="portfolio-section" id="case-studies">
+        <div class="container-fluid">
+            <div class="section-header fade-in">
+                <span class="section-label">Our Masterpieces</span>
+                <h2 class="section-title">Selected <span class="highlight">Case Studies</span></h2>
+                <p class="section-desc">Swipe through our curated gallery of digital excellence.</p>
+            </div>
+
+            <div class="coverflow-wrapper">
+                <div class="coverflow-container">
+                    
+                    <!-- 1. Aurora Stream -->
+                    <div class="coverflow-item" data-index="0">
+                        <div class="card-inner">
+                            <div class="card-image">
+                                <img src="case studies/logo1.jpg" alt="Aurora Stream">
+                                <div class="card-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-cat">Branding</span>
+                                <h3>Aurora Stream</h3>
+                                <button class="view-details-btn" 
+                                    data-title="Aurora Stream" 
+                                    data-cat="Branding"
+                                    data-desc="A fluid and dynamic identity for a digital streaming platform, capturing the essence of constant motion and light."
+                                    data-features="Logo Design, Motion Graphics, UI Kit">
+                                    View Project
+                                </button>
                             </div>
                         </div>
                     </div>
+
+                    <!-- 2. Urban Vogue -->
+                    <div class="coverflow-item" data-index="1">
+                        <div class="card-inner">
+                            <div class="card-image">
+                                <img src="case studies/web 2.jpg" alt="Urban Vogue">
+                                <div class="card-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-cat">Web Design</span>
+                                <h3>Urban Vogue</h3>
+                                <button class="view-details-btn"
+                                    data-title="Urban Vogue"
+                                    data-cat="Web Design"
+                                    data-desc="A high-fashion e-commerce experience featuring minimalist aesthetics to let the clothing lines speak for themselves."
+                                    data-features="E-commerce UI, UX Research, Frontend Dev">
+                                    View Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Nex News -->
+                    <div class="coverflow-item" data-index="2">
+                        <div class="card-inner">
+                            <div class="card-image">
+                                <img src="case studies/logo2.jpg" alt="Nex News">
+                                <div class="card-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-cat">Identity</span>
+                                <h3>Nex News</h3>
+                                <button class="view-details-btn"
+                                    data-title="Nex News"
+                                    data-cat="Identity"
+                                    data-desc="Modern typographic logo for a next-generation news aggregator, emphasizing speed and connectivity."
+                                    data-features="Logo Design, App Icon, Typography">
+                                    View Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Element Magazine -->
+                    <div class="coverflow-item" data-index="3">
+                        <div class="card-inner">
+                            <div class="card-image">
+                                <img src="case studies/web 3.jpg" alt="Element Magazine">
+                                <div class="card-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-cat">Web UI</span>
+                                <h3>Element Magazine</h3>
+                                <button class="view-details-btn"
+                                    data-title="Element Magazine"
+                                    data-cat="Web UI"
+                                    data-desc="Digital magazine layout focusing on readability and immersive storytelling through bold imagery and structure."
+                                    data-features="Editorial Design, Web Layout, CMS Integration">
+                                    View Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Mobile Hub -->
+                    <div class="coverflow-item" data-index="4">
+                        <div class="card-inner">
+                            <div class="card-image">
+                                <img src="case studies/logo3.jpg" alt="Mobile Hub">
+                                <div class="card-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-cat">App Brand</span>
+                                <h3>Mobile Hub</h3>
+                                <button class="view-details-btn"
+                                    data-title="Mobile Hub"
+                                    data-cat="App Brand"
+                                    data-desc="Centralized tech hub identity, using interconnecting nodes to represent community and hardware."
+                                    data-features="Logo Redesign, Iconography, Social Assets">
+                                    View Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Fresh Market -->
+                    <div class="coverflow-item" data-index="5">
+                        <div class="card-inner">
+                            <div class="card-image">
+                                <img src="case studies/web 4.png" alt="Fresh Market">
+                                <div class="card-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-cat">App Design</span>
+                                <h3>Fresh Market</h3>
+                                <button class="view-details-btn"
+                                    data-title="Fresh Market"
+                                    data-cat="App Design"
+                                    data-desc="Focusing on freshness and ease of use, this app design uses vibrant photography and intuitive navigation."
+                                    data-features="App UI, User Research, Prototyping">
+                                    View Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Veridian -->
+                    <div class="coverflow-item" data-index="6">
+                        <div class="card-inner">
+                            <div class="card-image">
+                                <img src="case studies/logo4.jpg" alt="Veridian">
+                                <div class="card-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-cat">Branding</span>
+                                <h3>Veridian</h3>
+                                <button class="view-details-btn"
+                                    data-title="Veridian"
+                                    data-cat="Branding"
+                                    data-desc="Veridian stands for Evolve, Connect, Succeed. Premium typographic logo exuding elegance."
+                                    data-features="Logo Design, Stationery, Corporate ID">
+                                    View Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Social Style -->
+                    <div class="coverflow-item" data-index="7">
+                        <div class="card-inner">
+                            <div class="card-image">
+                                <img src="case studies/web 5.jpg" alt="Social Style">
+                                <div class="card-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-cat">UI/UX</span>
+                                <h3>Social Style</h3>
+                                <button class="view-details-btn"
+                                    data-title="Social Style"
+                                    data-cat="UI/UX"
+                                    data-desc="A mobile platform design focused on visual feeds and quick interactions for viral trends."
+                                    data-features="Mobile UI, Design System, Interaction">
+                                    View Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- 10. DA DANCE ACADEMY -->
+                    <div class="coverflow-item" data-index="9">
+                        <div class="card-inner">
+                            <div class="card-image">
+                                <img src="case studies/logo6.jpg" alt="DA DANCE ACADEMY">
+                                <div class="card-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-cat">Academy</span>
+                                <h3>DA DANCE ACADEMY</h3>
+                                <button class="view-details-btn"
+                                    data-title="DA DANCE ACADEMY"
+                                    data-cat="Academy"
+                                    data-desc="An elegant and intricate gold emblem for a dance academy, symbolizing artistic excellence."
+                                    data-features="Logo Design, Emblem Creation, Academy Branding">
+                                    View Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 11. TAXCEL -->
+                    <div class="coverflow-item" data-index="10">
+                        <div class="card-inner">
+                            <div class="card-image">
+                                <img src="case studies/logo7.jpg" alt="TAXCEL">
+                                <div class="card-overlay"></div>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-cat">Fintech</span>
+                                <h3>TAXCEL</h3>
+                                <button class="view-details-btn"
+                                    data-title="TAXCEL"
+                                    data-cat="Fintech"
+                                    data-desc="A professional and trustworthy identity for a financial firm, featuring growth motifs."
+                                    data-features="Logo Design, Brand Identity, Financial Consulting">
+                                    View Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-card fade-in" data-project-id="2">
-                    <div class="project-image">
-                        <img src="case studies/web 2.jpg" alt="Fashion E-Commerce">
-                        <div class="project-overlay">
-                            <span class="view-btn"><i class="fas fa-expand-alt"></i> View Case Study</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="cat-tag">Web Design</div>
-                        <h3 class="project-title">Urban Vogue Store</h3>
-                        <p class="project-brief">High-conversion e-commerce design for streetwear.</p>
-                        <div class="hidden-details">
-                            <p class="detail-desc">A dark-themed, immersive shopping experience designed to highlight premium urban fashion. We focused on high-impact imagery and a seamless path to purchase.</p>
-                            <ul class="detail-features">
-                                <li>UI/UX Design</li>
-                                <li>Shopify Theme</li>
-                                <li>Responsive Layout</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Project 3 -->
-                <div class="project-card fade-in" data-project-id="3">
-                    <div class="project-image">
-                        <img src="case studies/logo2.jpg" alt="News Network Logo">
-                        <div class="project-overlay">
-                            <span class="view-btn"><i class="fas fa-expand-alt"></i> View Case Study</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="cat-tag">Logo Design</div>
-                        <h3 class="project-title">Nex News</h3>
-                        <p class="project-brief">Bold and dynamic visual identity for a media network.</p>
-                        <div class="hidden-details">
-                            <p class="detail-desc">Nex News required a logo that communicated speed, accuracy, and modernity. We utilized negative space and sharp angles to create a distinct and memorable mark.</p>
-                            <ul class="detail-features">
-                                <li>Logo Design</li>
-                                <li>Broadcast Overlay</li>
-                                <li>Brand Guide</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-card fade-in" data-project-id="4">
-                    <div class="project-image">
-                        <img src="case studies/web 3.jpg" alt="Editorial Web Layout">
-                        <div class="project-overlay">
-                            <span class="view-btn"><i class="fas fa-expand-alt"></i> View Case Study</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="cat-tag">UI/UX</div>
-                        <h3 class="project-title">Element Magazine</h3>
-                        <p class="project-brief">Clean editorial layout for a lifestyle publication.</p>
-                        <div class="hidden-details">
-                            <p class="detail-desc">We created a digital magazine layout that prioritizes readability and visual storytelling. The complex grid system allows for flexible content presentation while maintaining harmony.</p>
-                            <ul class="detail-features">
-                                <li>Web Layout</li>
-                                <li>Typography System</li>
-                                <li>Content Strategy</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 5 -->
-                <div class="project-card fade-in" data-project-id="5">
-                    <div class="project-image">
-                        <img src="case studies/logo3.jpg" alt="Mobile Tech Branding">
-                        <div class="project-overlay">
-                            <span class="view-btn"><i class="fas fa-expand-alt"></i> View Case Study</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="cat-tag">Identity</div>
-                        <h3 class="project-title">Mobile Hub</h3>
-                        <p class="project-brief">Tech-focused branding for a mobile retailer.</p>
-                        <div class="hidden-details">
-                            <p class="detail-desc">Mobile Hub needed a brand that felt connected and modern. We integrated digital connection motifs into the typography to clearly signal their tech niche to customers.</p>
-                            <ul class="detail-features">
-                                <li>Brand Identity</li>
-                                <li>Store Signage</li>
-                                <li>Merch Design</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 6 -->
-                <div class="project-card fade-in" data-project-id="6">
-                    <div class="project-image">
-                        <img src="case studies/web 4.png" alt="Grocery App Interface">
-                        <div class="project-overlay">
-                            <span class="view-btn"><i class="fas fa-expand-alt"></i> View Case Study</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="cat-tag">Web Design</div>
-                        <h3 class="project-title">Fresh Market App</h3>
-                        <p class="project-brief">Fresh and intuitive UI for online grocery delivery.</p>
-                        <div class="hidden-details">
-                            <p class="detail-desc">Focusing on freshness and ease of use, this app design uses vibrant photography and intuitive navigation to make grocery shopping a breeze for users of all ages.</p>
-                            <ul class="detail-features">
-                                <li>App UI Design</li>
-                                <li>User Research</li>
-                                <li>Interaction Design</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 7 -->
-                <div class="project-card fade-in" data-project-id="7">
-                    <div class="project-image">
-                        <img src="case studies/logo4.jpg" alt="Corporate Branding">
-                        <div class="project-overlay">
-                            <span class="view-btn"><i class="fas fa-expand-alt"></i> View Case Study</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="cat-tag">Branding</div>
-                        <h3 class="project-title">Veridian</h3>
-                        <p class="project-brief">Luxury corporate identity with a golden touch.</p>
-                        <div class="hidden-details">
-                            <p class="detail-desc">Veridian stands for Evolve, Connect, Succeed. We designed a premium typographic logo with custom serif lettering to exude elegance, stability, and authority.</p>
-                            <ul class="detail-features">
-                                <li>Logo Design</li>
-                                <li>Stationery Suite</li>
-                                <li>Corporate Identity</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 8 -->
-                <div class="project-card fade-in" data-project-id="8">
-                    <div class="project-image">
-                        <img src="case studies/web 5.jpg" alt="Social App UI">
-                        <div class="project-overlay">
-                            <span class="view-btn"><i class="fas fa-expand-alt"></i> View Case Study</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="cat-tag">UI/UX</div>
-                        <h3 class="project-title">Social Style App</h3>
-                        <p class="project-brief">Influencer platform interface for fashion trends.</p>
-                        <div class="hidden-details">
-                            <p class="detail-desc">A mobile platform design focused on visual feeds and quick interactions. The clean UI ensures the user content remains the star of the show.</p>
-                            <ul class="detail-features">
-                                <li>Mobile UI</li>
-                                <li>App Prototyping</li>
-                                <li>Design System</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </section>
 
-    <!-- Project Modal (Lightbox) -->
+    <!-- Project Modal -->
     <div id="projectModal" class="project-modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <div class="modal-body">
-                <div class="modal-image-container">
-                    <img id="modalImg" src="" alt="Project Image">
-                </div>
-                <div class="modal-text-container">
-                    <div class="modal-badges">
-                        <span id="modalCat" class="modal-cat-tag">Category</span>
-                    </div>
-                    <h2 id="modalTitle">Project Title</h2>
-                    <p id="modalDesc">Project description goes here...</p>
-                    
-                    <div class="modal-features-list">
-                        <h4>Services Delivered:</h4>
-                        <ul id="modalFeatures">
-                            <!-- Features injected via JS -->
-                        </ul>
-                    </div>
-                    
-                    <a href="index.html#contact" class="btn btn-primary modal-cta">Start a Project Like This</a>
-                </div>
+            <div class="modal-image-col">
+                <img id="modalImg" src="" alt="Project Image">
+            </div>
+            <div class="modal-info-col">
+                <span id="modalCat" class="modal-cat-tag">Category</span>
+                <h2 id="modalTitle" class="modal-title-text">Project Title</h2>
+                <p id="modalDesc" class="modal-desc-text">Description...</p>
+                <ul id="modalFeatures" class="modal-features"></ul>
+                <a href="index.html#contact" class="btn btn-primary">Start a Project Like This</a>
             </div>
         </div>
     </div>
 
-    <!-- Modern Footer -->
+    <!-- Footer -->
     <footer class="modern-footer">
         <div class="container">
             <div class="footer-top">
-                <!-- Column 1: Brand & About -->
                 <div class="footer-column">
                     <a href="index.html" class="logo">ASKera <span class="design-text">Design</span></a>
                     <p class="footer-desc">Elevating brands through premium design and innovative digital solutions. Let's build the future together.</p>
@@ -305,8 +317,6 @@
                         <a href="https://wa.me/919042171585" target="_blank" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-                
-                <!-- Column 2: Quick Links -->
                 <div class="footer-column">
                     <h4>Quick Links</h4>
                     <ul>
@@ -316,8 +326,6 @@
                         <li><a href="index.html#contact">Start a Project</a></li>
                     </ul>
                 </div>
-                
-                <!-- Column 3: Services -->
                 <div class="footer-column">
                     <h4>Services</h4>
                     <ul>
@@ -327,27 +335,15 @@
                         <li><a href="index.html#services">Social Media</a></li>
                     </ul>
                 </div>
-                
-                <!-- Column 4: Contact -->
                 <div class="footer-column">
                     <h4>Contact Us</h4>
                     <ul class="footer-contact-list">
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>sathya92.kumar28@gmail.com</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone-alt"></i>
-                            <span>+91 90421 71585</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Tamil Nadu, India</span>
-                        </li>
+                        <li><i class="fas fa-envelope"></i> <span>sathya92.kumar28@gmail.com</span></li>
+                        <li><i class="fas fa-phone-alt"></i> <span>+91 90421 71585</span></li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Tamil Nadu, India</span></li>
                     </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p class="copyright">&copy; 2025 ASKera Design. All Rights Reserved.</p>
                 <div class="footer-legal">
