@@ -820,3 +820,51 @@
         min-height: 48px;
     }
 }
+
+/* About Section Responsive */
+@media (max-width: 992px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .about-image {
+        order: -1;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .about-content {
+        text-align: center;
+    }
+
+    .about-stats {
+        justify-content: center;
+    }
+
+    .about-cta {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .experience-badge {
+        padding: 15px;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .experience-badge .years {
+        font-size: 1.8rem;
+    }
+
+    .experience-badge .text {
+        font-size: 0.8rem;
+    }
+
+    .about-subtitle {
+        font-size: 1.25rem;
+    }
+}
