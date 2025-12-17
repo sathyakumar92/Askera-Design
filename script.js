@@ -415,17 +415,9 @@ function initLazyLoading() {
 // PARALLAX EFFECT FOR HERO VIDEO
 // ==========================================
 
+// Parallax removed as per user request for fixed positioning
 function initParallax() {
-    const heroVideo = document.querySelector('.hero-video');
-    if (!heroVideo) return;
-    
-    function updateParallax() {
-        const scrolled = window.pageYOffset;
-        const parallaxSpeed = 0.5;
-        heroVideo.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-    }
-    
-    window.addEventListener('scroll', throttle(updateParallax, 10));
+    // Disabled
 }
 
 // ==========================================
@@ -493,14 +485,101 @@ function initServiceCardEffects() {
 // PRELOADER (Optional)
 // ==========================================
 
-function initPreloader() {
+// ==========================================
+// PAGE TRANSITIONS - BUTTERY SMOOTH
+// ==========================================
+
+// ==========================================
+// PAGE TRANSITIONS - REACT-LIKE
+// ==========================================
+
+
+function initPageTransitions() {
+    // 1. Create Overlay
+    let overlay = document.querySelector('.page-transition-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.classList.add('page-transition-overlay');
+        document.body.appendChild(overlay);
+    }
+
+    // 2. Initial Mount (Enter Animation)
     window.addEventListener('load', () => {
-        const preloader = document.querySelector('.preloader');
-        if (preloader) {
-            preloader.style.opacity = '0';
+        requestAnimationFrame(() => {
+            // Overlay fades out, body slides up via CSS animation
+            overlay.classList.add('hidden');
+        });
+    });
+
+    // 3. Handle Back/Forward Cache
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            overlay.classList.add('hidden');
+            document.body.classList.remove('page-exiting');
+        }
+    });
+
+    // 4. Link Interception & Prefetching
+    document.addEventListener('click', e => {
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        const target = link.getAttribute('target');
+
+        // Valid Internal Link Check
+        if (href && 
+            !href.startsWith('#') && 
+            !href.startsWith('mailto:') && 
+            !href.startsWith('tel:') && 
+            !href.startsWith('javascript:') &&
+            target !== '_blank') {
+
+            // Ignore Hash Links on Same Page
+            try {
+                const currentUrl = new URL(window.location.href);
+                const targetUrl = new URL(link.href);
+                if (currentUrl.pathname === targetUrl.pathname && 
+                    currentUrl.search === targetUrl.search) {
+                    return;
+                }
+            } catch (err) {}
+
+            e.preventDefault();
+
+            // React-like Exit Sequence
+            // A. Add class to animate body out (scale down/fade)
+            document.body.classList.add('page-exiting');
+            
+            // B. Fade in overlay slightly faster to cover transition
+            overlay.classList.remove('hidden');
+
+            // C. Navigate after animation (400ms match)
             setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
+                window.location.href = href;
+            }, 400); 
+        }
+    });
+
+    // 5. Intelligent Prefetching on Hover
+    document.addEventListener('mouseover', e => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        
+        const href = link.getAttribute('href');
+        if (href && 
+            !href.startsWith('#') && 
+            !href.startsWith('mailto:') && 
+            link.target !== '_blank' &&
+            !link.dataset.prefetched) {
+            
+            // Add prefetch tag
+            const linkTag = document.createElement('link');
+            linkTag.rel = 'prefetch';
+            linkTag.href = href;
+            document.head.appendChild(linkTag);
+            
+            link.dataset.prefetched = true;
         }
     });
 }
@@ -524,7 +603,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initParallax();
     initActiveNavOnScroll();
     initServiceCardEffects();
-    initPreloader();
+    initActiveNavOnScroll();
+    initServiceCardEffects();
+    initPageTransitions();
     
     // Update on scroll
     window.addEventListener('scroll', throttle(() => {

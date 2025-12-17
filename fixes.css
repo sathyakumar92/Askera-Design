@@ -217,9 +217,7 @@ textarea.form-control {
 }
 
 /* Prevent layout shift */
-.navbar {
-    will-change: transform;
-}
+/* .navbar { will-change: transform; } - Removed to prevent fixed positioning issues */
 
 /* Smooth scroll behavior */
 html {
@@ -351,8 +349,13 @@ body {
     }
 
     .nav-menu li a.btn {
-        padding: 14px 32px !important;
+        padding: 14px 40px !important;
+        /* Increased horizontal padding */
         border-radius: 50px !important;
+        white-space: nowrap !important;
+        /* Prevent text wrapping */
+        width: auto !important;
+        /* Allow growing */
     }
 }
 

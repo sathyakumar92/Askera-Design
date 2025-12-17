@@ -821,6 +821,46 @@
     }
 }
 
+/* ============================================
+   MOBILE FIXES (Call Me Button & Contact Form)
+   ============================================ */
+@media (max-width: 992px) {
+
+    .hero-content,
+    .hero-cta,
+    .btn-call-me,
+    .contact-form,
+    .form-control {
+        position: relative;
+    }
+
+    .hero-content {
+        z-index: 10 !important;
+    }
+
+    .hero-cta {
+        z-index: 20 !important;
+    }
+
+    .btn-call-me {
+        z-index: 20 !important;
+        pointer-events: auto !important;
+    }
+
+    .contact-section {
+        z-index: 5;
+    }
+
+    .contact-form {
+        z-index: 10 !important;
+    }
+
+    .form-control {
+        z-index: 10;
+        pointer-events: auto !important;
+    }
+}
+
 /* About Section Responsive */
 @media (max-width: 992px) {
     .about-grid {

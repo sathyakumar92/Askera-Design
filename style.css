@@ -158,6 +158,50 @@ img {
     position: relative;
 }
 
+/* Page Transition Overlay - Premium Fade */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-bg);
+    z-index: 100000;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.page-transition-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Ensure no transforms on body to protect position: sticky */
+body {
+    opacity: 1;
+    transform: none !important;
+}
+
+/* Optional: Content fade in for extra smoothness */
+.main-content-wrapper {
+    animation: contentFadeIn 0.8s ease-out forwards;
+}
+
+@keyframes contentFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Scroll Progress Bar */
 .scroll-progress {
     position: fixed;
@@ -171,21 +215,24 @@ img {
 
 /* Navigation */
 .navbar {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 9999;
-    padding: 20px 0;
-    transition: all var(--transition-base);
-    background: transparent;
+    padding: 15px 0;
+    /* Consistent padding */
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    /* Only animate background/shadow, not padding */
+    background: rgba(15, 23, 42, 0.95);
+    /* Always have background for better visibility */
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+    /* Subtle border always */
 }
 
 .navbar.scrolled {
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(20px);
     box-shadow: var(--shadow-md);
-    padding: 15px 0;
     border-bottom: 1px solid rgba(124, 58, 237, 0.2);
 }
 
@@ -289,10 +336,14 @@ img {
     z-index: 9998;
     opacity: 0;
     transition: opacity var(--transition-base);
+    pointer-events: none;
+    /* CRITICAL FIX: Allow clicks to pass through when hidden */
 }
 
 .menu-overlay.active {
     opacity: 1;
+    pointer-events: auto;
+    /* Re-enable clicks when visible */
 }
 
 /* Premium Button */
@@ -305,6 +356,7 @@ img {
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: 0.5px;
+    white-space: nowrap;
     border-radius: 50px;
     transition: all var(--transition-base);
     cursor: pointer;
@@ -389,7 +441,7 @@ img {
     background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-bg-light) 100%);
     position: relative;
     overflow: hidden;
-    padding-top: 80px;
+    padding-top: 0;
 }
 
 .hero-video {
