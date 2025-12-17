@@ -79,8 +79,11 @@
                     <h1>Transform Your Brand with <span class="highlight">Premium Design</span></h1>
                     <p class="hero-subtitle">We create stunning visual identities and digital experiences that make your business stand out in the modern marketplace. From logos to complete brand systems, we deliver excellence.</p>
                     <div class="hero-cta">
-                        <a href="tel:+919042171585" class="btn btn-call-me">
-                            <i class="fas fa-phone-alt"></i> Call Me
+                        <a href="https://wa.me/919042171585?text=call%20me%20%2B91%209042171585" class="btn btn-whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="#contact" class="btn btn-hero-cta">
+                            <i class="fas fa-paper-plane"></i> Contact Us
                         </a>
                     </div>
                 </div>
@@ -530,22 +533,49 @@
 
                 </div>
                 
-                <form class="contact-form fade-in-right" action="https://api.web3forms.com/submit" method="POST">
+                <form class="contact-form fade-in-right" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="access_key" value="f04efbf8-e6a1-4784-9d88-3885f0374d82">
                     
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="ASKera" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="john@company.com" required>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="askera@design.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" class="form-control" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Choose Service</label>
+                        <select id="service" name="service" class="form-control" required>
+                            <option value="" disabled selected>Select Service</option>
+                            <option value="Brand Identity">Brand Identity</option>
+                            <option value="Package Design">Package Design</option>
+                            <option value="Social Media Management">Social Media Management</option>
+                            <option value="Video Editing">Video Editing</option>
+                        </select>
                     </div>
                     
                     <div class="form-group">
                         <label for="message">Project Details</label>
                         <textarea id="message" name="message" class="form-control" placeholder="Tell us about your project requirements..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attachment">Upload File (Optional)</label>
+                        <input type="file" id="attachment" name="attachment" class="form-control" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.svg,.ttf,.psd,.ai,.mp4">
+                        <small style="color: var(--text-gray); font-size: 0.8rem; margin-top: 5px; display: block;">Supported: PDF, Word, PNG, JPG, SVG, TTF, PSD, AI, MP4</small>
                     </div>
                     
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
@@ -566,7 +596,7 @@
                         <a href="https://www.facebook.com/sklogosera" target="_blank" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/askeradesign/" target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.linkedin.com/in/sathya-kumar-3278a7263/" target="_blank" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://wa.me/919042171585" target="_blank" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/919042171585?text=call%20me%20%2B91%209042171585" target="_blank" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 

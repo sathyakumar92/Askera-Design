@@ -395,18 +395,18 @@ body {
     box-shadow: var(--shadow-glow);
 }
 
-.btn-call-me {
-    background: linear-gradient(135deg, var(--accent-teal), var(--accent-teal-light));
+.btn-hero-cta {
+    background: linear-gradient(135deg, var(--primary-purple), var(--accent-teal));
     color: var(--text-white);
     font-size: 1.1rem;
     padding: 18px 40px;
-    box-shadow: 0 8px 30px rgba(20, 184, 166, 0.4);
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
     animation: pulse 2s infinite;
 }
 
-.btn-call-me:hover {
+.btn-hero-cta:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 40px rgba(20, 184, 166, 0.6);
+    box-shadow: 0 12px 40px rgba(124, 58, 237, 0.6);
 }
 
 @keyframes pulse {
@@ -431,6 +431,19 @@ body {
     background: var(--accent-teal);
     color: var(--text-white);
     transform: translateY(-3px);
+}
+
+.btn-whatsapp {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: var(--text-white);
+    font-size: 1.1rem;
+    padding: 18px 40px;
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6);
 }
 
 /* Hero Section */
@@ -1287,6 +1300,16 @@ body {
     font-size: 1rem;
     font-family: var(--font-body);
     transition: all var(--transition-base);
+}
+
+.form-control option {
+    background: var(--dark-bg);
+    color: var(--text-white);
+}
+
+.form-control[type="file"] {
+    padding: 10px;
+    height: auto;
 }
 
 .form-control:focus {
