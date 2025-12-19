@@ -1,0 +1,456 @@
+/* ASKera Design - Case Studies Page Styles */
+:root {
+    --primary: #FF6B35;
+    --secondary: #00D4AA;
+    --purple: #9B5DE5;
+    --dark-bg: #0A1929;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --text-main: #FFFFFF;
+    --text-muted: #B0B0B0;
+    --font-heading: 'outfit', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    margin: 0;
+    overflow-x: hidden;
+    perspective: 1000px;
+    /* Global perspective */
+}
+
+/* =========================================
+   Modern Hero Section
+   ========================================= */
+.modern-hero {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #1a2c42 0%, #0A1929 70%);
+}
+
+.hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(155, 93, 229, 0.2) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(80px);
+    z-index: 0;
+    animation: pulseGlow 5s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.hero-content-wrapper {
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
+.hero-badge-pill {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    color: var(--secondary);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-headline {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--secondary), var(--purple), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-subtext {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   3D Cylinder Portfolio Section
+   ========================================= */
+.portfolio-section {
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+    z-index: 10;
+    position: relative;
+}
+
+.section-label {
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin: 0 0 20px;
+}
+
+/* 3D Stage */
+.coverflow-wrapper {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    perspective: 2000px;
+    /* Stronger perspective for cylinder */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coverflow-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: translateZ(-1000px);
+    /* Push the whole ring back so front item is near 0 */
+    transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+    /* Smooth rotation */
+}
+
+.coverflow-item {
+    position: absolute;
+    width: 400px;
+    height: 550px;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -275px;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    /* Hide back for cleaner look or keep for depth */
+    /* backface-visibility: visible; is better for cylinder to see far side items if desired, 
+       but for this style we might want to hide them or fade them */
+    transition: opacity 0.5s;
+    cursor: grab;
+}
+
+.coverflow-item:active {
+    cursor: grabbing;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(20, 30, 45, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    backdrop-filter: blur(5px);
+}
+
+.card-image {
+    height: 65%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    /* Let clicks pass to item */
+    transition: transform 0.5s;
+}
+
+/* Hover Effect on Item */
+.coverflow-item:hover .card-image img {
+    transform: scale(1.1);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(10, 25, 41, 1) 100%);
+}
+
+.card-content {
+    height: 35%;
+    padding: 25px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #0e1a29;
+}
+
+.card-cat {
+    color: var(--secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.card-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    margin: 0 0 15px;
+    color: white;
+}
+
+.view-details-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    align-self: flex-start;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.view-details-btn:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+}
+
+
+/* =========================================
+   Modal Styles
+   ========================================= */
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 3000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.project-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 1100px;
+    height: 85vh;
+    background: #0d1b2a;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8);
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.project-modal.active .modal-content {
+    transform: scale(1);
+}
+
+.close-modal {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-modal:hover {
+    background: #EF4444;
+    transform: rotate(90deg);
+}
+
+.modal-image-col {
+    width: 55%;
+    flex-shrink: 0;
+    background: #000;
+    height: 100%;
+    position: relative;
+}
+
+.modal-image-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-info-col {
+    padding: 60px 50px;
+    overflow-y: auto;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-cat-tag {
+    color: var(--secondary);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.modal-title-text {
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin: 0 0 25px;
+    font-family: var(--font-heading);
+    color: white;
+}
+
+.modal-desc-text {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.modal-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 50px;
+}
+
+.modal-features li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+.modal-features li::before {
+    content: '\f058';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 400;
+    color: var(--secondary);
+    margin-right: 15px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .modal-content {
+        flex-direction: column;
+        height: 95vh;
+    }
+
+    .modal-image-col {
+        width: 100%;
+        height: 40vh;
+    }
+
+    .modal-info-col {
+        width: 100%;
+        height: auto;
+        padding: 30px;
+    }
+
+    .coverflow-item {
+        width: 300px;
+        height: 450px;
+        margin-left: -150px;
+        margin-top: -225px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-headline {
+        font-size: 2.8rem;
+    }
+
+    .coverflow-wrapper {
+        height: 400px;
+    }
+
+    .coverflow-item {
+        width: 260px;
+        height: 380px;
+        margin-left: -130px;
+        margin-top: -190px;
+    }
+}
