@@ -873,29 +873,25 @@ body {
     }
 }
 
-/* Calculate 3D positioning for 6 cards */
+/* Calculate 3D positioning for 5 cards */
 .review-card-3d[data-index="0"] {
     transform: rotateY(0deg) translateZ(550px);
 }
 
 .review-card-3d[data-index="1"] {
-    transform: rotateY(60deg) translateZ(550px);
+    transform: rotateY(72deg) translateZ(550px);
 }
 
 .review-card-3d[data-index="2"] {
-    transform: rotateY(120deg) translateZ(550px);
+    transform: rotateY(144deg) translateZ(550px);
 }
 
 .review-card-3d[data-index="3"] {
-    transform: rotateY(180deg) translateZ(550px);
+    transform: rotateY(216deg) translateZ(550px);
 }
 
 .review-card-3d[data-index="4"] {
-    transform: rotateY(240deg) translateZ(550px);
-}
-
-.review-card-3d[data-index="5"] {
-    transform: rotateY(300deg) translateZ(550px);
+    transform: rotateY(288deg) translateZ(550px);
 }
 
 @keyframes rotateCarousel {

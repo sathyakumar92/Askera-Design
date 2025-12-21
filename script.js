@@ -38,6 +38,7 @@ const throttle = (func, limit) => {
 
 function updateScrollProgress() {
     const scrollProgress = document.getElementById('scrollProgress');
+    if (!scrollProgress) return;
     const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (window.pageYOffset / windowHeight) * 100;
     scrollProgress.style.width = scrolled + '%';
@@ -125,8 +126,8 @@ let currentSlideIndex = 0;
 let carouselAutoRotate = true;
 let carouselInterval;
 let carouselTimeout;
-const totalSlides = 6; // Updated for 6 review cards
-const rotationStep = 60; // 360/6 = 60 degrees per card
+const totalSlides = 5; // Updated for 5 review cards
+const rotationStep = 72; // 360/5 = 72 degrees per card
 
 // Initialize carousel autoplay
 function initCarouselAutoplay() {
@@ -504,12 +505,20 @@ function initPageTransitions() {
     }
 
     // 2. Initial Mount (Enter Animation)
-    window.addEventListener('load', () => {
+    const hideOverlay = () => {
         requestAnimationFrame(() => {
-            // Overlay fades out, body slides up via CSS animation
             overlay.classList.add('hidden');
+            document.body.classList.remove('page-exiting');
         });
-    });
+    };
+
+    if (document.readyState === 'complete') {
+        hideOverlay();
+    } else {
+        window.addEventListener('load', hideOverlay);
+        // Fail-safe: hide after 2 seconds no matter what
+        setTimeout(hideOverlay, 2000);
+    }
 
     // 3. Handle Back/Forward Cache
     window.addEventListener('pageshow', (event) => {
@@ -589,6 +598,7 @@ function initPageTransitions() {
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded and parsed');
     console.log('%c⚡ ASKera Design System Loaded', 'color: #D4A574; font-size: 16px; font-weight: bold;');
     
     // Initialize all features
@@ -601,8 +611,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initLazyLoading();
     initParallax();
-    initActiveNavOnScroll();
-    initServiceCardEffects();
     initActiveNavOnScroll();
     initServiceCardEffects();
     initPageTransitions();
