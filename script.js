@@ -723,7 +723,10 @@ function listenForReviews() {
       .onSnapshot((snapshot) => {
           const firebaseReviews = [];
           snapshot.forEach(doc => {
-              firebaseReviews.push(doc.data());
+              const data = doc.data();
+              // Filter out "Jebin" or test reviews
+              if (data.name && data.name.toLowerCase().includes('jebin')) return;
+              firebaseReviews.push(data);
           });
           
           renderReviews(firebaseReviews);
@@ -767,7 +770,16 @@ function loadCustomReviewsFallback() {
 
     // 2. Add Local (User-submitted) Reviews from current device
     const localReviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '[]');
-    localReviews.forEach(review => {
+    const filteredLocal = localReviews.filter(review => 
+        !(review.name && review.name.toLowerCase().includes('jebin'))
+    );
+    
+    // Update local storage if we filtered anything out
+    if (filteredLocal.length !== localReviews.length) {
+        localStorage.setItem(REVIEWS_KEY, JSON.stringify(filteredLocal));
+    }
+
+    filteredLocal.forEach(review => {
         carousel.appendChild(createReviewCardElement(review));
     });
     
