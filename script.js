@@ -10,6 +10,20 @@
 const REVIEWS_KEY = 'askera_reviews_v1';
 const GLOBAL_REVIEWS_COLLECTION = 'reviews';
 
+// ==========================================
+// FIREBASE CONFIGURATION (REAL-TIME SYNC)
+// ==========================================
+// IMPORTANT: Replace the values below with your real configuration 
+// from the Firebase Console (Settings > Project Settings)
+const firebaseConfig = {
+    apiKey: "REPLACE_WITH_YOUR_API_KEY",
+    authDomain: "askera-design.firebaseapp.com",
+    projectId: "askera-design",
+    storageBucket: "askera-design.appspot.com",
+    messagingSenderId: "REPLACE_WITH_SENDER_ID",
+    appId: "REPLACE_WITH_APP_ID"
+};
+
 const debounce = (func, wait) => {
     let timeout;
     return function executedFunction(...args) {
@@ -146,7 +160,11 @@ function updateCardPositions() {
     const { total } = getCarouselData();
     if (total === 0) return;
     
-    const radius = 550; // Distance from center
+    // Dynamic Radius based on screen width
+    let radius = 550; // Desktop
+    if (window.innerWidth < 480) radius = 320;
+    else if (window.innerWidth < 768) radius = 400;
+    else if (window.innerWidth < 1200) radius = 480;
 
     cards.forEach((card, index) => {
         const theta = (360 / total) * index;
@@ -615,7 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed');
     console.log('%c⚡ ASKera Design System Loaded', 'color: #D4A574; font-size: 16px; font-weight: bold;');
     
-    // Initialize all features
+    initFirebase();
     initSmoothScroll();
     initScrollAnimations();
     initCarouselHover();
@@ -628,10 +646,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initServiceCardEffects();
     initPageTransitions();
     animateRatingCounter();
-    loadCustomReviews(); // Load existing custom reviews (Global + Local)
+    // loadCustomReviews is now handled by the Firebase real-time listener
     
     // Initial position update
     updateCardPositions();
+    
+    // Update on resize
+    window.addEventListener('resize', debounce(updateCardPositions, 200));
     
     // Update on scroll
     window.addEventListener('scroll', throttle(() => {
@@ -675,16 +696,68 @@ const SEEDED_REVIEWS = [
 // Firebase Integration (Global Persistence)
 let db;
 function initFirebase() {
-    // Note: User needs to provide their own config here
-    // For now, it uses LocalStorage + a Hook for future cloud sync
-    console.log("Universal review system ready.");
+    if (typeof firebase !== 'undefined' && firebaseConfig.apiKey !== "REPLACE_WITH_YOUR_API_KEY") {
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            console.log("%c🔥 Firebase Real-time Sync Active", "color: #ffca28; font-weight: bold;");
+            
+            // Set up real-time listener
+            listenForReviews();
+        } catch (error) {
+            console.error("Firebase Initialization Error:", error);
+            loadCustomReviewsFallback(); // Fallback to local storage
+        }
+    } else {
+        console.warn("Firebase config missing. Real-time reviews disabled. Using LocalStorage only.");
+        loadCustomReviewsFallback();
+    }
 }
 
-async function loadCustomReviews() {
+function listenForReviews() {
+    if (!db) return;
+    
+    // Listen for real-time updates from Firestore
+    db.collection(GLOBAL_REVIEWS_COLLECTION)
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) => {
+          const firebaseReviews = [];
+          snapshot.forEach(doc => {
+              firebaseReviews.push(doc.data());
+          });
+          
+          renderReviews(firebaseReviews);
+      }, (error) => {
+          console.error("Firestore Listen Error:", error);
+          loadCustomReviewsFallback();
+      });
+}
+
+function renderReviews(firebaseReviews) {
     const carousel = document.getElementById('reviewCarousel');
     if (!carousel) return;
 
-    // Clear existing for a clean load (Prevents duplicates from HTML)
+    // Clear existing for a clean load
+    carousel.innerHTML = '';
+
+    // 1. Add Firebase Reviews first (LATEST)
+    firebaseReviews.forEach(review => {
+        carousel.appendChild(createReviewCardElement(review));
+    });
+
+    // 2. Add Seeded (Global) Reviews
+    SEEDED_REVIEWS.forEach(review => {
+        carousel.appendChild(createReviewCardElement(review));
+    });
+
+    // Final Setup
+    updateCardPositions();
+}
+
+function loadCustomReviewsFallback() {
+    const carousel = document.getElementById('reviewCarousel');
+    if (!carousel) return;
+
     carousel.innerHTML = '';
 
     // 1. Add Seeded (Global) Reviews
@@ -698,10 +771,6 @@ async function loadCustomReviews() {
         carousel.appendChild(createReviewCardElement(review));
     });
     
-    // 3. TODO: Fetch from Firebase for "All Devices" view
-    // if (db) { /* Fetch from Firestore and append */ }
-
-    // Final Setup
     updateCardPositions();
 }
 
@@ -709,8 +778,17 @@ function createReviewCardElement(review) {
     const div = document.createElement('div');
     div.className = 'review-card-3d';
     
-    // Format date
-    const date = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    // Format date from timestamp if available, otherwise use "Today" or string
+    let dateStr = "Recently";
+    if (review.timestamp) {
+        const d = review.timestamp.toDate ? review.timestamp.toDate() : new Date(review.timestamp);
+        dateStr = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    } else if (review.date) {
+        dateStr = review.date;
+    } else {
+        dateStr = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    }
+
     const rating = parseFloat(review.rating) || 5;
     
     div.innerHTML = `
@@ -738,7 +816,7 @@ function createReviewCardElement(review) {
                 <i class="fas fa-check-circle"></i> Verified Client
             </div>
             <div class="review-date">
-                <i class="fas fa-calendar"></i> ${date}
+                <i class="fas fa-calendar"></i> ${dateStr}
             </div>
         </div>
     `;
@@ -845,14 +923,21 @@ function initReviewModal() {
                 existing.push(reviewData);
                 localStorage.setItem(REVIEWS_KEY, JSON.stringify(existing));
 
-                // Hook for Global Cloud Sync
-                // if (db) { await db.collection(GLOBAL_REVIEWS_COLLECTION).add(reviewData); }
+                // Global Cloud Sync (Real-time)
+                if (db) {
+                    await db.collection(GLOBAL_REVIEWS_COLLECTION).add({
+                        ...reviewData,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
 
-                // Update DOM
-                const carousel = document.getElementById('reviewCarousel');
-                if (carousel) {
-                    carousel.appendChild(createReviewCardElement(reviewData));
-                    updateCardPositions();
+                // Update DOM (Only if Firebase is not active, as Firebase listener handles it otherwise)
+                if (!db) {
+                    const carousel = document.getElementById('reviewCarousel');
+                    if (carousel) {
+                        carousel.appendChild(createReviewCardElement(reviewData));
+                        updateCardPositions();
+                    }
                 }
 
                 // Attempt global submission
