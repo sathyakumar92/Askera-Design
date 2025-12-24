@@ -8,6 +8,7 @@
 // ==========================================
 
 const REVIEWS_KEY = 'askera_reviews_v1';
+const GLOBAL_REVIEWS_COLLECTION = 'reviews';
 
 const debounce = (func, wait) => {
     let timeout;
@@ -135,7 +136,7 @@ function getCarouselData() {
     const total = cards.length;
     return {
         total: total,
-        step: 360 / total
+        step: total > 0 ? 360 / total : 0
     };
 }
 
@@ -143,6 +144,8 @@ function getCarouselData() {
 function updateCardPositions() {
     const cards = document.querySelectorAll('.review-card-3d');
     const { total } = getCarouselData();
+    if (total === 0) return;
+    
     const radius = 550; // Distance from center
 
     cards.forEach((card, index) => {
@@ -616,9 +619,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initScrollAnimations();
     initCarouselHover();
-    initCarouselAutoplay(); // Initialize autoplay
-    updateCardPositions();
-    initCarouselHover();
     initCarouselAutoplay();
     initFormSubmission();
     initReviewModal();
@@ -628,7 +628,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initServiceCardEffects();
     initPageTransitions();
     animateRatingCounter();
-    loadCustomReviews(); // Load existing custom reviews
+    loadCustomReviews(); // Load existing custom reviews (Global + Local)
+    
+    // Initial position update
+    updateCardPositions();
     
     // Update on scroll
     window.addEventListener('scroll', throttle(() => {
@@ -638,22 +641,67 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// CUSTOM REVIEWS PERSISTENCE
+// CUSTOM REVIEWS PERSISTENCE & GLOBAL SEEDING
 // ==========================================
 
-function loadCustomReviews() {
-    const customReviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '[]');
-    const carousel = document.getElementById('reviewCarousel');
-    if (!carousel || customReviews.length === 0) {
-        if (carousel) updateCardPositions();
-        return;
+// These reviews will be visible to EVERYONE as a base
+const SEEDED_REVIEWS = [
+    {
+        name: "Karthik Raja",
+        role: "CEO, Prosper Ventures",
+        location: "Chennai, Tamil Nadu, India",
+        rating: 5,
+        review: "The branding ASKera Design created for Prosper Ventures has completely transformed our market presence. Their understanding of modern tech aesthetics combined with local cultural nuances is unmatched.",
+        photo: "clients/karthik.png"
+    },
+    {
+        name: "Ananya Iyer",
+        role: "CEO, Shakti Tech Solutions",
+        location: "Coimbatore, Tamil Nadu, India",
+        rating: 5,
+        review: "The digital transformation ASKera Design led for Shakti Tech Solutions has been remarkable. They managed to create a brand identity that is both technologically advanced and deeply professional.",
+        photo: "clients/ananya.jpg"
+    },
+    {
+        name: "Senthil Kumar",
+        role: "Director, Shakti Tech Solutions",
+        location: "Madurai, Tamil Nadu, India",
+        rating: 5,
+        review: "Professionalism and creativity at its best. ASKera Design helped us modernize Shakti Tech Solutions for the digital age. Exceptional service and impeccable attention to detail.",
+        photo: "clients/senthil.jpg"
     }
+];
 
-    customReviews.forEach(review => {
-        const card = createReviewCardElement(review);
-        carousel.appendChild(card);
+// Firebase Integration (Global Persistence)
+let db;
+function initFirebase() {
+    // Note: User needs to provide their own config here
+    // For now, it uses LocalStorage + a Hook for future cloud sync
+    console.log("Universal review system ready.");
+}
+
+async function loadCustomReviews() {
+    const carousel = document.getElementById('reviewCarousel');
+    if (!carousel) return;
+
+    // Clear existing for a clean load (Prevents duplicates from HTML)
+    carousel.innerHTML = '';
+
+    // 1. Add Seeded (Global) Reviews
+    SEEDED_REVIEWS.forEach(review => {
+        carousel.appendChild(createReviewCardElement(review));
+    });
+
+    // 2. Add Local (User-submitted) Reviews from current device
+    const localReviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '[]');
+    localReviews.forEach(review => {
+        carousel.appendChild(createReviewCardElement(review));
     });
     
+    // 3. TODO: Fetch from Firebase for "All Devices" view
+    // if (db) { /* Fetch from Firestore and append */ }
+
+    // Final Setup
     updateCardPositions();
 }
 
@@ -792,10 +840,13 @@ function initReviewModal() {
                     });
                 }
 
-                // Save locally
+                // Save locally for immediate feedback
                 const existing = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '[]');
                 existing.push(reviewData);
                 localStorage.setItem(REVIEWS_KEY, JSON.stringify(existing));
+
+                // Hook for Global Cloud Sync
+                // if (db) { await db.collection(GLOBAL_REVIEWS_COLLECTION).add(reviewData); }
 
                 // Update DOM
                 const carousel = document.getElementById('reviewCarousel');

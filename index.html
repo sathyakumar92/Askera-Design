@@ -33,6 +33,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="responsive.css">
+    
+    <!-- Universal Review Sync (Firebase) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
     
@@ -278,170 +282,7 @@
             <div class="carousel-wrapper">
                 <div class="carousel-container">
                     <div class="carousel-3d" id="reviewCarousel">
-                        <!-- Review 1 - Karthik Raja -->
-                        <div class="review-card-3d" data-index="0">
-                            <div class="card-shine"></div>
-                            <div class="review-header">
-                                <div class="client-avatar">
-                                    <img src="clients/karthik.png" alt="Karthik Raja">
-                                    <div class="avatar-glow"></div>
-                                </div>
-                                <div class="client-info">
-                                    <h4>Karthik Raja</h4>
-                                    <p>CEO, Prosper Ventures</p>
-                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu, India</span>
-                                </div>
-                            </div>
-                            <div class="rating-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="rating-number">5.0</span>
-                            </div>
-                            <p class="review-text">"The branding ASKera Design created for Prosper Ventures has completely transformed our market presence. Their understanding of modern tech aesthetics combined with local cultural nuances is unmatched."</p>
-                            <div class="review-footer">
-                                <div class="verified-badge">
-                                    <i class="fas fa-check-circle"></i> Verified Client
-                                </div>
-                                <div class="review-date">
-                                    <i class="fas fa-calendar"></i> January 2025
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 2 - Ananya Iyer -->
-                        <div class="review-card-3d" data-index="1">
-                            <div class="card-shine"></div>
-                            <div class="review-header">
-                                <div class="client-avatar">
-                                    <img src="clients/ananya.jpg" alt="Ananya Iyer">
-                                    <div class="avatar-glow"></div>
-                                </div>
-                                <div class="client-info">
-                                    <h4>Ananya Iyer</h4>
-                                    <p>CEO, Shakti Tech Solutions</p>
-                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> Coimbatore, Tamil Nadu, India</span>
-                                </div>
-                            </div>
-                            <div class="rating-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="rating-number">5.0</span>
-                            </div>
-                            <p class="review-text">"The digital transformation ASKera Design led for Shakti Tech Solutions has been remarkable. They managed to create a brand identity that is both technologically advanced and deeply professional."</p>
-                            <div class="review-footer">
-                                <div class="verified-badge">
-                                    <i class="fas fa-check-circle"></i> Verified Client
-                                </div>
-                                <div class="review-date">
-                                    <i class="fas fa-calendar"></i> February 2025
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 3 - Senthil Kumar -->
-                        <div class="review-card-3d" data-index="2">
-                            <div class="card-shine"></div>
-                            <div class="review-header">
-                                <div class="client-avatar">
-                                    <img src="clients/senthil.jpg" alt="Senthil Kumar">
-                                    <div class="avatar-glow"></div>
-                                </div>
-                                <div class="client-info">
-                                    <h4>Senthil Kumar</h4>
-                                    <p>Director, Shakti Tech Solutions</p>
-                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> Madurai, Tamil Nadu, India</span>
-                                </div>
-                            </div>
-                            <div class="rating-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="rating-number">5.0</span>
-                            </div>
-                            <p class="review-text">"Professionalism and creativity at its best. ASKera Design helped us modernize Shakti Tech Solutions for the digital age. Exceptional service and impeccable attention to detail."</p>
-                            <div class="review-footer">
-                                <div class="verified-badge">
-                                    <i class="fas fa-check-circle"></i> Verified Client
-                                </div>
-                                <div class="review-date">
-                                    <i class="fas fa-calendar"></i> March 2025
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 4 - David Miller -->
-                        <div class="review-card-3d" data-index="3">
-                            <div class="card-shine"></div>
-                            <div class="review-header">
-                                <div class="client-avatar">
-                                    <img src="clients/client4.png" alt="David Miller">
-                                    <div class="avatar-glow"></div>
-                                </div>
-                                <div class="client-info">
-                                    <h4>David Miller</h4>
-                                    <p>CTO, Silicon Valley Labs</p>
-                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> San Francisco, USA</span>
-                                </div>
-                            </div>
-                            <div class="rating-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="rating-number">5.0</span>
-                            </div>
-                            <p class="review-text">"ASKera Design delivered world-class UI/UX solutions that rival the best agencies in San Francisco. Their ability to translate complex tech concepts into clean, intuitive designs is truly remarkable."</p>
-                            <div class="review-footer">
-                                <div class="verified-badge">
-                                    <i class="fas fa-check-circle"></i> Verified Client
-                                </div>
-                                <div class="review-date">
-                                    <i class="fas fa-calendar"></i> April 2025
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 5 - Sarah Wilson -->
-                        <div class="review-card-3d" data-index="4">
-                            <div class="card-shine"></div>
-                            <div class="review-header">
-                                <div class="client-avatar">
-                                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=300&h=300&auto=format&fit=crop" alt="Sarah Wilson">
-                                    <div class="avatar-glow"></div>
-                                </div>
-                                <div class="client-info">
-                                    <h4>Sarah Wilson</h4>
-                                    <p>Marketing Head, Outback Adventures</p>
-                                    <span class="client-location"><i class="fas fa-map-marker-alt"></i> Sydney, Australia</span>
-                                </div>
-                            </div>
-                            <div class="rating-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="rating-number">5.0</span>
-                            </div>
-                            <p class="review-text">"Exceptional creativity and lightning-fast delivery. ASKera Design has been our go-to partner for all our social media marketing visuals. They consistently exceed our expectations with every project."</p>
-                            <div class="review-footer">
-                                <div class="verified-badge">
-                                    <i class="fas fa-check-circle"></i> Verified Client
-                                </div>
-                                <div class="review-date">
-                                    <i class="fas fa-calendar"></i> June 2025
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Reviews will be dynamically loaded here by script.js -->
                     </div>
                 </div>
 

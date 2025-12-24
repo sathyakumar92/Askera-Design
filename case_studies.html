@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="case_studies.css">
     <link rel="stylesheet" href="responsive.css">
+    
+    <!-- Universal Review Sync (Firebase) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
@@ -304,6 +308,157 @@
                 <ul id="modalFeatures" class="modal-features"></ul>
                 <a href="index.html#contact" class="btn btn-primary">Start a Project Like This</a>
             </div>
+        </div>
+    </div>
+
+    <!-- Client Reviews - Premium 3D Carousel with Autoplay -->
+    <section class="section reviews-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Testimonials</span>
+                <h2 class="section-title">Client <span class="highlight">Voices</span></h2>
+                <p class="section-desc">Real feedback from real clients across the globe. Excellence recognized worldwide.</p>
+            </div>
+
+            <!-- Overall Rating Animated Circle -->
+            <div class="overall-rating-container fade-in">
+                <div class="rating-circle-wrapper">
+                    <svg class="rating-svg" viewBox="0 0 100 100">
+                        <defs>
+                            <linearGradient id="ratingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="var(--primary-purple)" />
+                                <stop offset="100%" stop-color="var(--accent-teal)" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="rating-bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="rating-progress" id="overallRatingCircle" cx="50" cy="50" r="45"></circle>
+                    </svg>
+                    <div class="rating-value">
+                        <span class="rating-number" id="overallRatingNumber">0.0</span>
+                        <div class="rating-stars-mini">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="rating-info">
+                    <h3>Top Rated Agency</h3>
+                    <p>Based on <span class="highlight" style="font-weight: 700;">100+</span> Verified Reviews</p>
+                </div>
+            </div>
+            
+            <div class="carousel-wrapper">
+                <div class="carousel-container">
+                    <div class="carousel-3d" id="reviewCarousel">
+                        <!-- Reviews will be dynamically loaded here by script.js -->
+                    </div>
+                </div>
+
+                <!-- Enhanced Carousel Controls -->
+                <div class="carousel-controls fade-in">
+                    <button class="carousel-btn carousel-btn-prev" onclick="rotateCarousel('prev')" aria-label="Previous review">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="carousel-indicators" id="carouselIndicators">
+                        <span class="indicator active" data-slide="0"></span>
+                        <span class="indicator" data-slide="1"></span>
+                        <span class="indicator" data-slide="2"></span>
+                        <span class="indicator" data-slide="3"></span>
+                        <span class="indicator" data-slide="4"></span>
+                    </div>
+                    
+                    <button class="carousel-btn carousel-btn-next" onclick="rotateCarousel('next')" aria-label="Next review">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Autoplay Toggle -->
+                <div class="carousel-autoplay-toggle">
+                    <button class="autoplay-btn" id="autoplayToggle" onclick="toggleAutoplay()">
+                        <i class="fas fa-pause"></i>
+                        <span>Autoplay On</span>
+                    </button>
+                </div>
+
+                <!-- Write a Review Button -->
+                <div class="write-review-btn-wrapper fade-in">
+                    <button class="btn btn-outline" id="openReviewModal">
+                        <i class="fas fa-pen-nib"></i> Write a Review
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Modal -->
+    <div class="modal review-modal" id="reviewModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="closeReviewModal">&times;</button>
+            <div class="modal-header">
+                <h2>Share Your <span class="highlight">Experience</span></h2>
+                <p>Your feedback helps us grow and helps others make informed decisions.</p>
+            </div>
+            <form class="review-form" id="reviewForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="access_key" value="f04efbf8-e6a1-4784-9d88-3885f0374d82">
+                <input type="hidden" name="subject" value="New Client Review - ASKera Design">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reviewName">Your Name</label>
+                        <input type="text" id="reviewName" name="name" class="form-control" placeholder="John Doe" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reviewRole">Role / Company</label>
+                        <input type="text" id="reviewRole" name="role" class="form-control" placeholder="CEO, TechCorp" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewLocation">Location</label>
+                        <input type="text" id="reviewLocation" name="location" class="form-control" placeholder="New York, USA" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Rating</label>
+                    <div class="star-rating" id="starRating">
+                        <i class="fas fa-star" data-rating="1"></i>
+                        <i class="fas fa-star" data-rating="2"></i>
+                        <i class="fas fa-star" data-rating="3"></i>
+                        <i class="fas fa-star" data-rating="4"></i>
+                        <i class="fas fa-star" data-rating="5"></i>
+                        <input type="hidden" name="rating" id="ratingValue" value="5">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewText">Your Review</label>
+                    <textarea id="reviewText" name="review" class="form-control" placeholder="Tell us about your experience working with us..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Profile Photo</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="reviewPhoto" name="attachment" class="file-input" accept="image/*">
+                        <label for="reviewPhoto" class="btn btn-outline file-upload-cta">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span id="file-upload-text">Upload Your Photo</span>
+                        </label>
+                    </div>
+                    <small style="color: var(--text-gray-dark); font-size: 0.8rem; margin-top: 8px; display: block;">Recommended: Square portrait image (JPG, PNG)</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span>Submit Review</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
         </div>
     </div>
 
