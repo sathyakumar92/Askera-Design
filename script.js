@@ -7,6 +7,8 @@
 // UTILITY FUNCTIONS
 // ==========================================
 
+const REVIEWS_KEY = 'askera_reviews_v1';
+
 const debounce = (func, wait) => {
     let timeout;
     return function executedFunction(...args) {
@@ -118,7 +120,7 @@ function initScrollAnimations() {
 }
 
 // ==========================================
-// 3D CAROUSEL CONTROLS - ENHANCED
+// 3D CAROUSEL CONTROLS - ENHANCED & DYNAMIC
 // ==========================================
 
 let currentRotation = 0;
@@ -126,19 +128,79 @@ let currentSlideIndex = 0;
 let carouselAutoRotate = true;
 let carouselInterval;
 let carouselTimeout;
-const totalSlides = 5; // Updated for 5 review cards
-const rotationStep = 72; // 360/5 = 72 degrees per card
+
+// Dynamic carousel properties
+function getCarouselData() {
+    const cards = document.querySelectorAll('.review-card-3d');
+    const total = cards.length;
+    return {
+        total: total,
+        step: 360 / total
+    };
+}
+
+// Update 3D positions dynamically
+function updateCardPositions() {
+    const cards = document.querySelectorAll('.review-card-3d');
+    const { total } = getCarouselData();
+    const radius = 550; // Distance from center
+
+    cards.forEach((card, index) => {
+        const theta = (360 / total) * index;
+        card.style.transform = `rotateY(${theta}deg) translateZ(${radius}px)`;
+        card.setAttribute('data-index', index);
+    });
+
+    // Update Indicators
+    const indicatorContainer = document.getElementById('carouselIndicators');
+    if (indicatorContainer) {
+        indicatorContainer.innerHTML = '';
+        for (let i = 0; i < total; i++) {
+            const span = document.createElement('span');
+            span.className = `indicator ${i === currentSlideIndex ? 'active' : ''}`;
+            span.setAttribute('data-slide', i);
+            span.onclick = () => jumpToSlide(i);
+            indicatorContainer.appendChild(span);
+        }
+    }
+}
+
+function jumpToSlide(index) {
+    const { total, step } = getCarouselData();
+    const diff = index - currentSlideIndex;
+    currentRotation -= diff * step;
+    currentSlideIndex = index;
+    
+    applyCarouselTransform();
+    updateIndicators();
+    stopAutoplay();
+    resetAutoplayTimer();
+}
+
+function applyCarouselTransform() {
+    const carousel = document.querySelector('.carousel-3d');
+    if (carousel) {
+        carousel.style.animation = 'none';
+        carousel.style.transform = `rotateY(${currentRotation}deg)`;
+    }
+}
+
+function resetAutoplayTimer() {
+    clearTimeout(carouselTimeout);
+    carouselTimeout = setTimeout(() => {
+        resumeAutoplay();
+    }, 8000);
+}
 
 // Initialize carousel autoplay
 function initCarouselAutoplay() {
     if (carouselAutoRotate) {
         carouselInterval = setInterval(() => {
             rotateCarousel('next');
-        }, 5000); // Auto-rotate every 5 seconds
+        }, 5000);
     }
 }
 
-// Stop autoplay
 function stopAutoplay() {
     if (carouselInterval) {
         clearInterval(carouselInterval);
@@ -146,7 +208,6 @@ function stopAutoplay() {
     }
 }
 
-// Resume autoplay
 function resumeAutoplay() {
     stopAutoplay();
     if (carouselAutoRotate) {
@@ -158,32 +219,24 @@ function rotateCarousel(direction) {
     const carousel = document.querySelector('.carousel-3d');
     if (!carousel) return;
     
-    // Temporarily stop auto-rotation
+    const { total, step } = getCarouselData();
+    
     stopAutoplay();
     clearTimeout(carouselTimeout);
     
     if (direction === 'next') {
-        currentRotation -= rotationStep;
-        currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+        currentRotation -= step;
+        currentSlideIndex = (currentSlideIndex + 1) % total;
     } else if (direction === 'prev') {
-        currentRotation += rotationStep;
-        currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+        currentRotation += step;
+        currentSlideIndex = (currentSlideIndex - 1 + total) % total;
     }
     
-    // Apply rotation
-    carousel.style.animation = 'none';
-    carousel.style.transform = `rotateY(${currentRotation}deg)`;
-    
-    // Update indicators
+    applyCarouselTransform();
     updateIndicators();
-    
-    // Resume auto-rotation after 8 seconds of inactivity
-    carouselTimeout = setTimeout(() => {
-        resumeAutoplay();
-    }, 8000);
+    resetAutoplayTimer();
 }
 
-// Update active indicator
 function updateIndicators() {
     const indicators = document.querySelectorAll('.indicator');
     indicators.forEach((indicator, index) => {
@@ -195,32 +248,10 @@ function updateIndicators() {
     });
 }
 
-// Indicator click handler
 function initIndicatorControls() {
-    const indicators = document.querySelectorAll('.indicator');
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-            const diff = index - currentSlideIndex;
-            currentRotation -= diff * rotationStep;
-            currentSlideIndex = index;
-            
-            const carousel = document.querySelector('.carousel-3d');
-            if (carousel) {
-                carousel.style.animation = 'none';
-                carousel.style.transform = `rotateY(${currentRotation}deg)`;
-            }
-            
-            updateIndicators();
-            stopAutoplay();
-            clearTimeout(carouselTimeout);
-            carouselTimeout = setTimeout(() => {
-                resumeAutoplay();
-            }, 8000);
-        });
-    });
+    // Handled by dynamic indicator creation in updateCardPositions
 }
 
-// Toggle autoplay function
 function toggleAutoplay() {
     const autoplayBtn = document.getElementById('autoplayToggle');
     const carousel = document.querySelector('.carousel-3d');
@@ -230,37 +261,27 @@ function toggleAutoplay() {
     carouselAutoRotate = !carouselAutoRotate;
     
     if (carouselAutoRotate) {
-        // Start autoplay
         autoplayBtn.innerHTML = '<i class="fas fa-pause"></i><span>Autoplay On</span>';
         autoplayBtn.classList.remove('paused');
-        carousel.classList.remove('paused');
-        carousel.style.animation = 'rotateCarousel 40s infinite linear';
         resumeAutoplay();
     } else {
-        // Pause autoplay
         autoplayBtn.innerHTML = '<i class="fas fa-play"></i><span>Autoplay Off</span>';
         autoplayBtn.classList.add('paused');
-        carousel.classList.add('paused');
-        carousel.style.animation = 'none';
         stopAutoplay();
     }
 }
 
-// Pause carousel on hover
 function initCarouselHover() {
     const carousel = document.querySelector('.carousel-3d');
     if (carousel) {
         carousel.addEventListener('mouseenter', () => {
             stopAutoplay();
-            carousel.style.animationPlayState = 'paused';
+            if (carouselAutoRotate) carousel.style.animationPlayState = 'paused';
         });
         
         carousel.addEventListener('mouseleave', () => {
-            carousel.style.animationPlayState = 'running';
-            clearTimeout(carouselTimeout);
-            carouselTimeout = setTimeout(() => {
-                resumeAutoplay();
-            }, 3000);
+            if (carouselAutoRotate) carousel.style.animationPlayState = 'running';
+            resetAutoplayTimer();
         });
     }
 }
@@ -291,9 +312,9 @@ function initFormSubmission() {
                 body: formData
             });
             
-            const data = await response.json();
+            const result = await response.json();
             
-            if (data.success) {
+            if (response.ok && result.success) {
                 // Success state
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
                 submitBtn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
@@ -302,7 +323,7 @@ function initFormSubmission() {
                 form.reset();
                 
                 // Show success message
-                showNotification('Thank you! Your message has been sent successfully.', 'success');
+                showNotification('Thank you! Your project details have been received.', 'success');
                 
                 // Reset button after 3 seconds
                 setTimeout(() => {
@@ -311,14 +332,14 @@ function initFormSubmission() {
                     submitBtn.style.background = '';
                 }, 3000);
             } else {
-                throw new Error('Submission failed');
+                throw new Error(result.message || 'Submission failed');
             }
         } catch (error) {
-            // Error state
+            console.error('Submission error:', error);
             submitBtn.innerHTML = '<i class="fas fa-exclamation"></i> Failed - Try Again';
             submitBtn.style.background = 'linear-gradient(135deg, #EF4444, #DC2626)';
             
-            showNotification('Oops! Something went wrong. Please try again.', 'error');
+            showNotification('Oops! Submission failed. Please try again.', 'error');
             
             setTimeout(() => {
                 submitBtn.disabled = false;
@@ -336,34 +357,24 @@ function initFormSubmission() {
 function showNotification(message, type = 'info') {
     // Create notification element
     const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 30px;
-        padding: 20px 30px;
-        background: ${type === 'success' ? '#10B981' : '#EF4444'};
-        color: white;
-        border-radius: 8px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        z-index: 10000;
-        animation: slideIn 0.3s ease-out;
-        max-width: 350px;
-    `;
+    notification.className = `notification ${type}`;
     
     notification.innerHTML = `
         <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
-        <span style="margin-left: 10px;">${message}</span>
+        <span>${message}</span>
     `;
     
     document.body.appendChild(notification);
     
     // Remove after 5 seconds
     setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease-out';
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(100%)';
         setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 300);
+            if (notification.parentNode) {
+                document.body.removeChild(notification);
+            }
+        }, 400);
     }, 5000);
 }
 
@@ -606,14 +617,18 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initCarouselHover();
     initCarouselAutoplay(); // Initialize autoplay
-    initIndicatorControls(); // Initialize indicator controls
+    updateCardPositions();
+    initCarouselHover();
+    initCarouselAutoplay();
     initFormSubmission();
+    initReviewModal();
     initBackToTop();
     initLazyLoading();
-    initParallax();
     initActiveNavOnScroll();
     initServiceCardEffects();
     initPageTransitions();
+    animateRatingCounter();
+    loadCustomReviews(); // Load existing custom reviews
     
     // Update on scroll
     window.addEventListener('scroll', throttle(() => {
@@ -623,35 +638,272 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// CSS ANIMATIONS (Add to page)
+// CUSTOM REVIEWS PERSISTENCE
 // ==========================================
 
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
+function loadCustomReviews() {
+    const customReviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '[]');
+    const carousel = document.getElementById('reviewCarousel');
+    if (!carousel || customReviews.length === 0) {
+        if (carousel) updateCardPositions();
+        return;
     }
-    
-    @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
 
-// Expose functions to global scope for inline event handlers
+    customReviews.forEach(review => {
+        const card = createReviewCardElement(review);
+        carousel.appendChild(card);
+    });
+    
+    updateCardPositions();
+}
+
+function createReviewCardElement(review) {
+    const div = document.createElement('div');
+    div.className = 'review-card-3d';
+    
+    // Format date
+    const date = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    const rating = parseFloat(review.rating) || 5;
+    
+    div.innerHTML = `
+        <div class="card-shine"></div>
+        <div class="review-header">
+            <div class="client-avatar">
+                <img src="${review.photo || 'clients/default.png'}" alt="${review.name}">
+                <div class="avatar-glow"></div>
+            </div>
+            <div class="client-info">
+                <h4>${review.name}</h4>
+                <p>${review.role}</p>
+                <span class="client-location"><i class="fas fa-map-marker-alt"></i> ${review.location}</span>
+            </div>
+        </div>
+        <div class="rating-stars">
+            ${Array(Math.floor(rating)).fill('<i class="fas fa-star"></i>').join('')}
+            ${rating % 1 !== 0 ? '<i class="fas fa-star-half-alt"></i>' : ''}
+            ${Array(5 - Math.ceil(rating)).fill('<i class="far fa-star"></i>').join('')}
+            <span class="rating-number">${rating.toFixed(1)}</span>
+        </div>
+        <p class="review-text">"${review.review}"</p>
+        <div class="review-footer">
+            <div class="verified-badge">
+                <i class="fas fa-check-circle"></i> Verified Client
+            </div>
+            <div class="review-date">
+                <i class="fas fa-calendar"></i> ${date}
+            </div>
+        </div>
+    `;
+    return div;
+}
+
+// ==========================================
+// REVIEW MODAL LOGIC
+// ==========================================
+
+function initReviewModal() {
+    const openBtn = document.getElementById('openReviewModal');
+    const closeBtn = document.getElementById('closeReviewModal');
+    const modal = document.getElementById('reviewModal');
+    const backdrop = modal?.querySelector('.modal-backdrop');
+    const form = document.getElementById('reviewForm');
+    const stars = document.querySelectorAll('#starRating i');
+    const ratingInput = document.getElementById('ratingValue');
+
+    if (!openBtn || !modal) return;
+
+    // Open Modal
+    openBtn.addEventListener('click', () => {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', closeModal);
+
+    // File Upload Logic
+    const fileInput = document.getElementById('reviewPhoto');
+    const uploadText = document.getElementById('file-upload-text');
+    const uploadCTA = document.querySelector('.file-upload-cta');
+
+    if (fileInput && uploadText && uploadCTA) {
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                const fileName = this.files[0].name;
+                uploadText.textContent = `Selected: ${fileName.substring(0, 20)}${fileName.length > 20 ? '...' : ''}`;
+                uploadCTA.classList.add('selected');
+                uploadCTA.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                uploadText.textContent = 'Upload Your Photo';
+                uploadCTA.classList.remove('selected');
+                uploadCTA.querySelector('i').className = 'fas fa-cloud-upload-alt';
+            }
+        });
+    }
+
+    // Star Rating
+    stars.forEach(star => {
+        star.addEventListener('mouseenter', function() {
+            highlightStars(this.dataset.rating);
+        });
+        star.addEventListener('mouseleave', () => highlightStars(ratingInput.value));
+        star.addEventListener('click', function() {
+            ratingInput.value = this.dataset.rating;
+            highlightStars(this.dataset.rating);
+        });
+    });
+
+    function highlightStars(rating) {
+        stars.forEach(s => s.classList.toggle('active', s.dataset.rating <= rating));
+    }
+
+    highlightStars(5);
+
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting Review...';
+
+            try {
+                const formData = new FormData(form);
+                const reviewData = {
+                    name: formData.get('name'),
+                    role: formData.get('role'),
+                    location: formData.get('location'),
+                    rating: formData.get('rating') || 5,
+                    review: formData.get('review'),
+                    photo: null
+                };
+
+                const photoFile = formData.get('attachment');
+                if (photoFile && photoFile.size > 0) {
+                    reviewData.photo = await new Promise(resolve => {
+                        const reader = new FileReader();
+                        reader.onload = ev => resolve(ev.target.result);
+                        reader.readAsDataURL(photoFile);
+                    });
+                }
+
+                // Save locally
+                const existing = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '[]');
+                existing.push(reviewData);
+                localStorage.setItem(REVIEWS_KEY, JSON.stringify(existing));
+
+                // Update DOM
+                const carousel = document.getElementById('reviewCarousel');
+                if (carousel) {
+                    carousel.appendChild(createReviewCardElement(reviewData));
+                    updateCardPositions();
+                }
+
+                // Attempt global submission
+                fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData }).catch(console.error);
+
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Review Posted!';
+                submitBtn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+                showNotification('Your review has been posted to the website!', 'success');
+
+                setTimeout(() => {
+                    form.reset();
+                    closeModal();
+                    if (uploadText) uploadText.textContent = 'Upload Your Photo';
+                    if (uploadCTA) uploadCTA.classList.remove('selected');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = '';
+                    highlightStars(5);
+                }, 2000);
+
+            } catch (err) {
+                console.error(err);
+                submitBtn.innerHTML = '<i class="fas fa-exclamation"></i> Error';
+                showNotification('Could not post review. Please try again.', 'error');
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }, 3000);
+            }
+        });
+    }
+}
+
+// ==========================================
+// NOTIFICATION SYSTEM
+// ==========================================
+
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+        <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => notification.parentNode && document.body.removeChild(notification), 400);
+    }, 5000);
+}
+
+// ==========================================
+// BACK TO TOP
+// ==========================================
+
+function initBackToTop() {
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+    window.addEventListener('scroll', throttle(() => {
+        btn.classList.toggle('visible', window.pageYOffset > 500);
+    }, 200));
+    btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ==========================================
+// RATING COUNTER ANIMATION
+// ==========================================
+
+function animateRatingCounter() {
+    const ratingNumber = document.getElementById('overallRatingNumber');
+    const container = document.querySelector('.overall-rating-container');
+    if (!ratingNumber || !container) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let startValue = 0;
+                const endValue = 5.0;
+                const duration = 2500;
+                const startTime = performance.now();
+
+                function updateCounter(currentTime) {
+                    const elapsedTime = currentTime - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const easeProgress = 1 - Math.pow(1 - progress, 4);
+                    ratingNumber.textContent = (easeProgress * endValue).toFixed(1);
+                    if (progress < 1) requestAnimationFrame(updateCounter);
+                }
+
+                container.classList.add('visible');
+                requestAnimationFrame(updateCounter);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    observer.observe(container);
+}
+
+// Global functions
 window.rotateCarousel = rotateCarousel;
 window.toggleAutoplay = toggleAutoplay;
+function initLazyLoading() {}
+function initParallax() {}
