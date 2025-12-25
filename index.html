@@ -29,10 +29,13 @@
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Mountains+of+Christmas:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="responsive.css">
+    
+    <!-- Christmas Theme 2024 🎄 -->
+    <link rel="stylesheet" href="christmas-theme.css">
     
     <!-- Universal Review Sync (Firebase) -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -282,38 +285,7 @@
             <div class="carousel-wrapper">
                 <div class="carousel-container">
                     <div class="carousel-3d" id="reviewCarousel">
-                        <!-- Static Reviews -->
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="reviewer-img">
-                                    <i class="fas fa-user-circle" style="font-size: 40px; color: var(--primary-purple);"></i>
-                                </div>
-                                <div class="reviewer-info">
-                                    <h4>Sarah Jenkins</h4>
-                                    <span>CEO, TechStart</span>
-                                </div>
-                            </div>
-                            <div class="review-rating">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <p class="review-text">"ASKera Design transformed our brand identity completely. The logo and brand guidelines they delivered were world-class."</p>
-                        </div>
-
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="reviewer-img">
-                                    <i class="fas fa-user-circle" style="font-size: 40px; color: var(--primary-purple);"></i>
-                                </div>
-                                <div class="reviewer-info">
-                                    <h4>David Chen</h4>
-                                    <span>Marketing Director</span>
-                                </div>
-                            </div>
-                            <div class="review-rating">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <p class="review-text">"Incredible attention to detail. The 3D visuals for our product launch were stunning and helped us secure funding."</p>
-                        </div>
+                        <!-- Reviews will be dynamically loaded here by script.js -->
                     </div>
                 </div>
 
@@ -492,6 +464,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" class="form-control" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="service">Choose Service</label>
                         <select id="service" name="service" class="form-control" required>
                             <option value="" disabled selected>Select Service</option>
@@ -597,5 +579,7 @@
 
     <script src="script.js"></script>
     <script src="hamburger.js"></script>
+    <!-- Christmas Magic 🎄 -->
+    <script src="christmas.js"></script>
 </body>
 </html>
